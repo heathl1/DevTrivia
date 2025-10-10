@@ -1,53 +1,45 @@
 <!doctype html>
 <html class="no-js" lang="">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+
+  <title>DevTrivia – Home</title>
+
+  <!-- This page is the main starting point for my DevTrivia project. -->
+  <!-- I am keeping it simple with just a title, a short tagline, and two buttons for navigation. -->
+
+  <!-- I am linking to my CSS file here so I can style the page later if I want. -->
   <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
 
-  <meta charset="utf-8"/>
-  <!-- properties included in template (unsure if needed)
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
-  -->
-
-  <!-- links included in template (unsure if needed)
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="manifest" href="site.webmanifest">
-  -->
+  <!-- I am setting a theme color for the browser tab area, just to make it look nicer. -->
   <meta name="theme-color" content="#fafafa">
-
 </head>
 
 <body>
-  <h1>DevTrivia</h1>
+<!-- This is the main title of my web app. I want it to be the first thing people see. -->
+<h1>DevTrivia</h1>
 
-  <p>Are you smarter than a Senior Dev?</p>
-  <form action = "index.html">
-    <button type="submit">LogIn</button>
-  </form>
+<!-- This is a short line to describe what my app is about. -->
+<p>Are you smarter than a Senior Dev?</p>
 
-  <form action="game.html">
-    <button type="submit">Play</button>
-  </form>
+<!-- I am using two forms with buttons to simulate basic navigation for now. -->
+<!-- The first form is for logging in, but it does not do anything yet because this is just a prototype. -->
+<form action="index.html">
+  <button type="submit">Log In</button>
+</form>
 
-<!-- add more actions that will occur as a result of user interaction
-how will we handle the user clicking sign in?
-how will we handle the user creating a new account?
-how will we handle forgot password?
--->
+<!-- I added this div with a height value so there is space between the buttons. -->
+<div style="height: 25px;"></div>
 
+<!-- This second form sends the player to the game page. -->
+<!-- When the player clicks Play, the browser will go to game.html where the question appears. -->
+<form action="game.html">
+  <button type="submit">Play</button>
+</form>
 
-
+<!-- Everything below this point could be expanded later when we add user accounts, -->
+<!-- login functionality, and maybe difficulty levels or categories. -->
+<!-- For now, this page just helps me test navigation between files. -->
 </body>
-
 </html>
