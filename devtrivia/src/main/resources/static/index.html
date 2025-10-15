@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DevTrivia – Home</title>
+
+    <!-- This page is the main starting point for my DevTrivia project. -->
+    <!-- I am keeping it simple with just a title, a short tagline, and two buttons for navigation. -->
+
+    <!-- I am linking to my CSS file here so I can style the page later if I want. -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- I am setting a theme color for the browser tab area, just to make it look nicer. -->
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<!-- This is the main title of my web app. I want it to be the first thing people see. -->
+<h1>DevTrivia</h1>
+
+<!-- This is a short line to describe what my app is about. -->
+<p>Are you smarter than a Senior Dev?</p>
+
+<!-- I am using two forms with buttons to simulate basic navigation for now. -->
+<!-- The first form is for logging in, but it does not do anything yet because this is just a prototype. -->
+<form action="index.html">
+    <button type="submit">Log In</button>
+</form>
+
+<!-- I added this div with a height value so there is space between the buttons. -->
+<div style="height: 25px;"></div>
+
+<!-- This second form sends the player to the game page. -->
+<!-- When the player clicks Play, the browser will go to game.html where the question appears. -->
+<form action="game.html">
+    <button type="submit">Play</button>
+</form>
+
+<!-- Everything below this point could be expanded later when we add user accounts, -->
+<!-- login functionality, and maybe difficulty levels or categories. -->
+<!-- For now, this page just helps me test navigation between files. -->
+</body>
+</html>
