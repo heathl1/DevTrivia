@@ -127,9 +127,12 @@ function loadQuestion(index, questions, root) {
     optionTexts.forEach((text) => {
         const li = document.createElement('li');
         // We use the index for the radio button value, as intended.
-        const radioValue = encodeURIComponent(text);
-        li.innerHTML = `<label><input type="radio" name="ans" value="${radioValue}"> ${text}</label>`;
+        const radioValue = text;
+        li.innerHTML = `<label><input type="radio" name="ans" value="${radioValue}"></label>`;
         choicesEl.appendChild(li);
+
+        const label = li.querySelector('label');
+        label.appendChild(document.createTextNode(text));
     });
 
     choicesEl.addEventListener('change', () => {
