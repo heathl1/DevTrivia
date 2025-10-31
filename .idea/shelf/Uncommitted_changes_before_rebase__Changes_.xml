@@ -1,0 +1,37 @@
+<changelist name="Uncommitted_changes_before_rebase_[Changes]" date="1760904335934" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before rebase [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/model/Answer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/mvnw.cmd" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/model/Question.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/controller/AnswerController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/controller/QuestionController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/DevtriviaApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/repository/AnswerRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/mvnw" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/model/Question$level.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/classes/com/example/devtrivia/repository/QuestionRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="devtrivia/target/test-classes/com/example/devtrivia/DevtriviaApplicationTests.class" />
+  </binary>
+</changelist>
