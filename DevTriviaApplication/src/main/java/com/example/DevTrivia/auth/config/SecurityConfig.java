@@ -2,6 +2,7 @@ package com.example.DevTrivia.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,9 +32,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // 💡 CSRF: /guest is the only endpoint that should ignore CSRF for a POST request.
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/guest"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/reset", "/guest", "/css/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/sessions").authenticated() // ✅ Allow POST /api/sessions only for authenticated users
+                        .requestMatchers("/", "/login", "/register", "/reset", "/guest", "/css/**", "/game.js").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

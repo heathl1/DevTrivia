@@ -1,10 +1,12 @@
 package com.example.DevTrivia.auth.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.Instant;
 
 @Entity
-@Table(name = "users", indexes = {
+@Table(name = "user", indexes = {
         @Index(name = "ux_users_username", columnList = "username", unique = true)
 })
 public class User {
@@ -26,8 +28,9 @@ public class User {
     @Column(name = "security_answer_hash", length = 255)
     private String securityAnswerHash;
 
+    @CreationTimestamp 
     @Column(name = "join_date", nullable = false, columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
-    private Instant joinDate = Instant.now();
+    private Instant joinDate;
 
     @Column(name = "games_played", nullable = false)
     private Integer gamesPlayed = 0;

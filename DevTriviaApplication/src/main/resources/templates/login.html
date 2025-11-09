@@ -12,7 +12,7 @@
     <p th:if="${param.reset}" class="ok">Password reset successful. Please sign in.</p>
     <p th:if="${message}" class="err" th:text="${message}"></p>
 
-    <form method="post" th:action="@{/templates/login}">
+    <form method="post" th:action="@{/login}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <label>Username <input type="text" name="username" required></label>
         <label>Password <input type="password" name="password" required></label>
@@ -20,8 +20,8 @@
     </form>
 
     <div class="muted">
-        <a th:href="@{/templates/register}">Create an account</a> ·
-        <a th:href="@{/templates/reset}">Forgot password?</a>
+        <a th:href="@{/register}">Create an account</a> ·
+        <a th:href="@{/reset}">Forgot password?</a>
     </div>
 
     <form method="post" th:action="@{/guest}" style="margin-top:1rem;">

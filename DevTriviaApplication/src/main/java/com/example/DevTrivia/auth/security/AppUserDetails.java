@@ -1,6 +1,7 @@
 package com.example.DevTrivia.auth.security;
 
 import com.example.DevTrivia.auth.model.User;
+import com.example.DevTrivia.model.Session;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,4 +27,8 @@ public class AppUserDetails implements UserDetails {
     @Override public boolean isAccountNonLocked() { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return true; }
+
+    public User getUser() {
+        return this.user;
+    }
 }
