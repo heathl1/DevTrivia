@@ -28,7 +28,7 @@
 <!-- This script contains the logic that fetches the question and handles user interaction. -->
 
 
-<form id="exit-form" action="/api/sessions" method="post">
+<form id="exit-form" action="@{/api/sessions}" method="post">
   <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
   <button type="submit" id = "exit-button">Exit</button>
 </form>
