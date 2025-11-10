@@ -22,6 +22,7 @@ public class User {
     @Column(length = 255)
     private String email;
 
+
     @Column(name = "security_question", length = 255)
     private String securityQuestion;
 
