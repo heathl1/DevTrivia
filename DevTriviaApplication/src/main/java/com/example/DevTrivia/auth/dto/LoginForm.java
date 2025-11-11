@@ -1,4 +1,4 @@
-package com.example.DevTrivia.dto;
+package com.example.DevTrivia.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

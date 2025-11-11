@@ -1,10 +1,10 @@
-package com.example.DevTrivia.controller;
+package com.example.DevTrivia.auth.controller;
 
-import com.example.DevTrivia.dto.LoginForm;
-import com.example.DevTrivia.dto.PasswordResetForm;
-import com.example.DevTrivia.dto.RegistrationForm;
-import com.example.DevTrivia.model.User;
-import com.example.DevTrivia.service.UserService;
+import com.example.DevTrivia.auth.dto.LoginForm;
+import com.example.DevTrivia.auth.dto.PasswordResetForm;
+import com.example.DevTrivia.auth.dto.RegistrationForm;
+import com.example.DevTrivia.auth.model.User;
+import com.example.DevTrivia.auth.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

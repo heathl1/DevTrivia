@@ -1,7 +1,7 @@
-package com.example.DevTrivia.security;
+package com.example.DevTrivia.auth.security;
 
-import com.example.DevTrivia.model.User;
-import com.example.DevTrivia.repository.UserRepository;
+import com.example.DevTrivia.auth.model.User;
+import com.example.DevTrivia.auth.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

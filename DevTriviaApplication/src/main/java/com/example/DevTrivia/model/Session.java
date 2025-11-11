@@ -1,5 +1,6 @@
 package com.example.DevTrivia.model;
 
+import com.example.DevTrivia.auth.model.User;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 

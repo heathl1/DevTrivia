@@ -1,4 +1,4 @@
-package com.example.DevTrivia.model;
+package com.example.DevTrivia.auth.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
