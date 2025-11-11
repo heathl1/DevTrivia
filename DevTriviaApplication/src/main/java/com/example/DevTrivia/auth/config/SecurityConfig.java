@@ -2,6 +2,7 @@ package com.example.DevTrivia.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +20,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Ensure Spring uses our JPA UserDetailsService + BCrypt
+    // Use our JPA-backed UserDetailsService with BCrypt
     @Bean
     public DaoAuthenticationProvider authProvider(UserDetailsService uds, PasswordEncoder encoder) {
         DaoAuthenticationProvider p = new DaoAuthenticationProvider();
@@ -31,14 +32,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/guest"))
+                // If your public forms don't include CSRF tokens yet, we can ignore CSRF for just these
+                .csrf(csrf -> csrf.ignoringRequestMatchers(
+                        "/guest",        // POST for "play as guest"
+                        "/register",     // POST register
+                        "/reset"         // POST password reset
+                ))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/reset", "/guest", "/css/**").permitAll()
+                        // Static files
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+
+                        // Public pages (GET)
+                        .requestMatchers(HttpMethod.GET, "/", "/login", "/register", "/reset").permitAll()
+
+                        // Public form submits (POST)
+                        .requestMatchers(HttpMethod.POST, "/guest", "/register", "/reset").permitAll()
+
+                        // Admin area
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // Everything else requires login
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)   // change to /lobby if you want
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

@@ -4,21 +4,21 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "users", indexes = {
-        @Index(name = "ux_users_username", columnList = "username", unique = true)
-})
+@Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255, unique = true)
+    @Column(nullable = false, unique = true, length = 64)
     private String username;
 
-    @Column(name = "password_hash", nullable = false, length = 255)
-    private String passwordHash;
-
-    @Column(length = 255)
+    @Column(name = "email", length = 255)
     private String email;
+
+    @Column(name = "password_hash", length = 255)
+    private String passwordHash;
 
     @Column(name = "security_question", length = 255)
     private String securityQuestion;
@@ -26,27 +26,56 @@ public class User {
     @Column(name = "security_answer_hash", length = 255)
     private String securityAnswerHash;
 
-    @Column(name = "join_date", nullable = false, columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "join_date", nullable = false)
     private Instant joinDate = Instant.now();
-
-    @Column(name = "games_played", nullable = false)
-    private Integer gamesPlayed = 0;
 
     @Column(name = "total_correct", nullable = false)
     private Integer totalCorrect = 0;
 
+    @Column(name = "games_played", nullable = false)
+    private Integer gamesPlayed = 0;
+
+    // IMPORTANT: Boolean wrapper to match possible NULLs in DB; default false.
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin = false;
 
-    // getters/setters…
-    public Long getId() { return id; } public void setId(Long id) { this.id = id; }
-    public String getUsername() { return username; } public void setUsername(String username) { this.username = username; }
-    public String getPasswordHash() { return passwordHash; } public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getEmail() { return email; } public void setEmail(String email) { this.email = email; }
-    public String getSecurityQuestion() { return securityQuestion; } public void setSecurityQuestion(String securityQuestion) { this.securityQuestion = securityQuestion; }
-    public String getSecurityAnswerHash() { return securityAnswerHash; } public void setSecurityAnswerHash(String securityAnswerHash) { this.securityAnswerHash = securityAnswerHash; }
-    public Instant getJoinDate() { return joinDate; } public void setJoinDate(Instant joinDate) { this.joinDate = joinDate; }
-    public Integer getGamesPlayed() { return gamesPlayed; } public void setGamesPlayed(Integer gamesPlayed) { this.gamesPlayed = gamesPlayed; }
-    public Integer getTotalCorrect() { return totalCorrect; } public void setTotalCorrect(Integer totalCorrect) { this.totalCorrect = totalCorrect; }
-    public Boolean getIsAdmin() { return isAdmin; } public void setIsAdmin(Boolean admin) { isAdmin = admin; }
+    public User() {}
+
+    /* ---------- Getters / Setters ---------- */
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
+    public String getSecurityQuestion() { return securityQuestion; }
+    public void setSecurityQuestion(String securityQuestion) { this.securityQuestion = securityQuestion; }
+
+    public String getSecurityAnswerHash() { return securityAnswerHash; }
+    public void setSecurityAnswerHash(String securityAnswerHash) { this.securityAnswerHash = securityAnswerHash; }
+
+    public Instant getJoinDate() { return joinDate; }
+    public void setJoinDate(Instant joinDate) { this.joinDate = joinDate; }  // <-- used by AdminController
+
+    public Integer getTotalCorrect() { return totalCorrect; }
+    public void setTotalCorrect(Integer totalCorrect) { this.totalCorrect = totalCorrect; }
+
+    public Integer getGamesPlayed() { return gamesPlayed; }
+    public void setGamesPlayed(Integer gamesPlayed) { this.gamesPlayed = gamesPlayed; }
+
+    /** Preferred getter for security layer that expects Boolean wrapper. */
+    public Boolean getIsAdmin() { return isAdmin; }
+
+    /** Convenience boolean-style getter (not required but handy in templates). */
+    public boolean isAdmin() { return Boolean.TRUE.equals(isAdmin); }
+
+    /** Setter used by AdminController#createUser and edit. */
+    public void setAdmin(boolean admin) { this.isAdmin = admin; }
 }
