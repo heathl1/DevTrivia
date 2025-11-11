@@ -1,7 +1,6 @@
-package com.example.DevTrivia.auth.security;
+package com.example.DevTrivia.security;
 
-import com.example.DevTrivia.auth.model.User;
-import com.example.DevTrivia.model.Session;
+import com.example.DevTrivia.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

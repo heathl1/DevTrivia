@@ -1,4 +1,4 @@
-package com.example.DevTrivia.auth.config;
+package com.example.DevTrivia.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

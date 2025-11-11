@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>DevTrivia – Game</title>
   <script src="/game.js"></script>
-
   <!-- This page shows the simple trivia game screen for my DevTrivia project. -->
   <!-- It will load one question from my Java server when the page finishes loading. -->
   <!-- I am keeping the layout very basic on purpose since this is an early prototype. -->
@@ -28,7 +27,7 @@
 <!-- This script contains the logic that fetches the question and handles user interaction. -->
 
 
-<form id="exit-form" action="@{/api/sessions}" method="post">
+<form id="exit-form" action="/api/sessions" method="post">
   <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
   <button type="submit" id = "exit-button">Exit</button>
 </form>

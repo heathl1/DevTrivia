@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         const exitButton = document.getElementById('exit-button');
         const exitForm = document.getElementById('exit-form');
-
+        const finalScore = score;
+        const finalQuestionsAnswered = total_questions;
         // ... (rest of your score and totalQuestions setup)
 
         // File: game.js (Inside the exitButton click listener block)
@@ -46,10 +47,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // 2. Data payload for the score
                 const data = {
-                    score: score, // The final score
-                    totalQuestions: total_questions // The final total questions
+                    score: finalScore, // The final score
+                    total_questions: finalQuestionsAnswered // The final total questions
                 };
-
                 try {
                     const response = await fetch(exitForm.action, {
                         method: 'POST',
@@ -146,7 +146,6 @@ function loadQuestion(index, questions, root, score, total_questions) {
             loadQuestion(index + 1, questions, root, score, total_questions)
         }
         else {
-            question.style.display = 'none'
             submit.style.display = 'none';
             next.style.display =  'none';
             result.textContent =  `Your Score is ${score}/${total_questions}`;

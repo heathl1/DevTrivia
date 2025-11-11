@@ -1,6 +1,6 @@
-package com.example.DevTrivia.auth.repository;
+package com.example.DevTrivia.repository;
 
-import com.example.DevTrivia.auth.model.User;
+import com.example.DevTrivia.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

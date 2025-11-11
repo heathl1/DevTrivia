@@ -1,8 +1,8 @@
-package com.example.DevTrivia.auth.service;
+package com.example.DevTrivia.service;
 
-import com.example.DevTrivia.auth.dto.RegistrationForm;
-import com.example.DevTrivia.auth.model.User;
-import com.example.DevTrivia.auth.repository.UserRepository;
+import com.example.DevTrivia.dto.RegistrationForm;
+import com.example.DevTrivia.model.User;
+import com.example.DevTrivia.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

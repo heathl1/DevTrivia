@@ -1,7 +1,7 @@
 package com.example.DevTrivia.controller;
-import com.example.DevTrivia.auth.model.User;
-import com.example.DevTrivia.auth.security.AppUserDetails;
-import com.example.DevTrivia.auth.service.UserService;
+import com.example.DevTrivia.model.User;
+import com.example.DevTrivia.security.AppUserDetails;
+import com.example.DevTrivia.service.UserService;
 import com.example.DevTrivia.model.Session;
 import com.example.DevTrivia.repository.SessionRepository;
 import org.springframework.http.HttpStatus;
