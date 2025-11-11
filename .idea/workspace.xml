@@ -5,34 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="- created basic directory structure&#10;- started basic html code for main web pages (index.html &amp; game.html)&#10;- added database file that shows table structure and current database entries">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/DevtriviaApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/controller/AnswerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/controller/QuestionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/model/Answer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/model/Question.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/repository/AnswerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/repository/QuestionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/resources/static/game.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/resources/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/test/java/com/example/devtrivia/DevtriviaApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/DevtriviaApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/controller/AnswerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/controller/QuestionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/model/Answer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/model/Question$level.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/model/Question.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/repository/AnswerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/repository/QuestionRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/static/game.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/test-classes/com/example/devtrivia/DevtriviaApplicationTests.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevTriviaApplication/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/DevTriviaApplication/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,14 +76,20 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/heathl1/DevTrivia.git&quot;,
-    &quot;accountId&quot;: &quot;7fecab81-2d29-42c3-9947-6c7db8ba4daf&quot;
+    &quot;accountId&quot;: &quot;9acf3036-8753-4218-a7ed-8e3136f59d48&quot;
   }
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="33UN9nXH2wwX0ai2dao5ZETxjYH" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -116,6 +106,7 @@
     "JUnit.DevtriviaApplicationTests.executor": "Run",
     "JavaScript Debug.game.html.executor": "Run",
     "JavaScript Debug.index.html.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -125,9 +116,15 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.DevTriviaApplication.executor": "Run",
     "Spring Boot.DevtriviaApplication.executor": "Debug",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "disable.download.node.interpreter.editor.notification": "true",
-    "git-widget-placeholder": "layla-main-10102025",
+    "git-widget-placeholder": "Kelli111025",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/laylaheath/Documents/CSC Capstone",
     "node.js.detected.package.eslint": "true",
@@ -136,10 +133,16 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.52213544",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.10834553",
     "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -153,6 +156,16 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="DevTriviaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="23" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="DevTriviaApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.DevTrivia.DevTriviaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -165,8 +178,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
@@ -202,6 +215,8 @@
       <workItem from="1760571020231" duration="2060000" />
       <workItem from="1760902898454" duration="90000" />
       <workItem from="1760903011010" duration="1341000" />
+      <workItem from="1762818633722" duration="105000" />
+      <workItem from="1762818794529" duration="3394000" />
     </task>
     <task id="LOCAL-00001" summary="- created basic directory structure&#10;- started basic html code for main web pages (index.html &amp; game.html)&#10;- added database file that shows table structure and current database entries">
       <option name="closed" value="true" />
