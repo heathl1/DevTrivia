@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
-                              `id` bigint NOT NULL AUTO_INCREMENT,
-                              `name` varchar(255) NOT NULL,
-                              PRIMARY KEY (`id`),
-                              UNIQUE KEY `name` (`name`)
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,13 +48,13 @@ DROP TABLE IF EXISTS `forum_posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `forum_posts` (
-                               `id` bigint NOT NULL AUTO_INCREMENT,
-                               `user_id` bigint NOT NULL,
-                               `content` varchar(1000) NOT NULL,
-                               `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                               PRIMARY KEY (`id`),
-                               KEY `fk_post_user` (`user_id`),
-                               CONSTRAINT `fk_post_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_post_user` (`user_id`),
+  CONSTRAINT `fk_post_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -75,8 +75,8 @@ DROP TABLE IF EXISTS `forum_topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `forum_topics` (
-                                `id` int DEFAULT NULL,
-                                `topic_name` int DEFAULT NULL
+  `id` int DEFAULT NULL,
+  `topic_name` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,20 +97,20 @@ DROP TABLE IF EXISTS `question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `question` (
-                            `id` bigint NOT NULL AUTO_INCREMENT,
-                            `category_id` bigint NOT NULL,
-                            `text` varchar(255) DEFAULT NULL,
-                            `option_a` varchar(255) DEFAULT NULL,
-                            `option_b` varchar(255) DEFAULT NULL,
-                            `option_c` varchar(255) DEFAULT NULL,
-                            `option_d` varchar(255) DEFAULT NULL,
-                            `correct_answer` varchar(255) NOT NULL,
-                            `difficulty_level` tinyint DEFAULT NULL,
-                            `question_text` varchar(255) DEFAULT NULL,
-                            PRIMARY KEY (`id`),
-                            KEY `fk_question_category` (`category_id`),
-                            CONSTRAINT `fk_question_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
-                            CONSTRAINT `question_chk_1` CHECK ((`difficulty_level` between 0 and 2))
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `category_id` bigint NOT NULL,
+  `text` varchar(255) DEFAULT NULL,
+  `option_a` varchar(255) DEFAULT NULL,
+  `option_b` varchar(255) DEFAULT NULL,
+  `option_c` varchar(255) DEFAULT NULL,
+  `option_d` varchar(255) DEFAULT NULL,
+  `correct_answer` varchar(255) NOT NULL,
+  `difficulty_level` tinyint DEFAULT NULL,
+  `question_text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_question_category` (`category_id`),
+  CONSTRAINT `fk_question_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `question_chk_1` CHECK ((`difficulty_level` between 0 and 2))
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -132,14 +132,14 @@ DROP TABLE IF EXISTS `session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `session` (
-                           `id` bigint NOT NULL AUTO_INCREMENT,
-                           `user_id` bigint NOT NULL,
-                           `score` int NOT NULL,
-                           `total_questions` int NOT NULL,
-                           `completion_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           PRIMARY KEY (`id`),
-                           KEY `fk_session_user` (`user_id`),
-                           CONSTRAINT `fk_session_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `score` int NOT NULL,
+  `total_questions` int NOT NULL,
+  `completion_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_session_user` (`user_id`),
+  CONSTRAINT `fk_session_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -160,18 +160,18 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-                        `id` bigint NOT NULL AUTO_INCREMENT,
-                        `username` varchar(255) NOT NULL,
-                        `password_hash` varchar(255) NOT NULL,
-                        `email` varchar(255) DEFAULT NULL,
-                        `security_answer_hash` varchar(255) DEFAULT NULL,
-                        `join_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        `games_played` int DEFAULT '0',
-                        `total_correct` int DEFAULT '0',
-                        `is_admin` smallint DEFAULT NULL,
-                        `security_question` varchar(255) DEFAULT NULL,
-                        PRIMARY KEY (`id`),
-                        UNIQUE KEY `username` (`username`)
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `security_answer_hash` varchar(255) DEFAULT NULL,
+  `join_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `games_played` int DEFAULT '0',
+  `total_correct` int DEFAULT '0',
+  `is_admin` smallint DEFAULT NULL,
+  `security_question` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
