@@ -5,17 +5,17 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "session")  // change to your actual table name if different
 public class Session {
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
-    User user;
-    // Question class - object that contains info for entries in question table
+
     @Id
-    @Column(name ="id")
-    private Long id = this.user.getId();
-    /*
-    @Column(name = "user_id")
-    private int user_id;*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "score")
     private int score;
@@ -26,25 +26,51 @@ public class Session {
     @Column(name = "completion_date")
     private Timestamp completion_date;
 
+    // JPA needs a no-arg constructor
+    public Session() {
+    }
+
+    // --- getters ---
+
+    public Long getId() {
+        return this.id;
+    }
+
     public User getUser() {
-        return user;
+        return this.user;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public int getTotalQuestions() {
+        return this.total_questions;
+    }
+
+    public Timestamp getCompletionDate() {
+        return this.completion_date;
+    }
+
+    // --- setters ---
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    //getters
-    public Long getId() {return this.id;}
-    public Long getUserId() {return this.user.getId();}
-    public int getScore() {return this.score;}
-    public int getTotalQuestions() {return this.total_questions;}
-    public java.sql.Timestamp getCompletionDate() {return this.completion_date;}
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-    // setters
-    public void setId(Long id) {this.id = id;}
-    public void setUserId(Long user_id) {this.user.setId(user_id);}
-    public void setScore(int score) {this.score = score;}
-    public void setTotalQuestions(int total_questions) {this.total_questions = total_questions;}
-    public void setCompletionDate(java.sql.Timestamp completion_date) {this.completion_date = completion_date;}
+    public void setTotalQuestions(int total_questions) {
+        this.total_questions = total_questions;
+    }
+
+    public void setCompletionDate(Timestamp completion_date) {
+        this.completion_date = completion_date;
+    }
 }

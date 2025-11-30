@@ -32,16 +32,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // 💡 CSRF: /guest is the only endpoint that should ignore CSRF for a POST request.
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/guest"))
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/guest", "/api/sessions")
+                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/sessions").authenticated() // ✅ Allow POST /api/sessions only for authenticated users
+                        .requestMatchers(HttpMethod.POST, "/api/sessions").permitAll()
                         .requestMatchers("/", "/login", "/register", "/reset", "/guest", "/css/**", "/game.js").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)   // change to /lobby if you want
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
