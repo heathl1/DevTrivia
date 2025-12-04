@@ -1,11 +1,37 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head><meta charset="UTF-8"><title>Admin – Dashboard</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>DevTrivia Admin Home</title>
+</head>
 <body>
-<h1>Admin Dashboard</h1>
+<h1>DevTrivia Admin Home</h1>
+
+<p>Welcome, admin. From here you can do everything a normal player can do plus manage users.</p>
+
+<hr>
+
+<h2>Regular options</h2>
 <ul>
-    <li><a th:href="@{/admin/users}">Manage users</a></li>
+    <!-- Change these hrefs so they match your actual routes -->
+    <li><a th:href="@{/}">Player Home</a></li>
+    <li><a th:href="@{/play}">Play DevTrivia</a></li>
+    <li><a th:href="@{/profile}">My Profile</a></li>
 </ul>
-<p><a th:href="@{/}">Back to Home</a></p>
+
+<hr>
+
+<h2>Admin options</h2>
+<ul>
+    <li><a th:href="@{/admin/users}">Manage Users</a></li>
+    <!-- later you can add more like manage questions, view stats, etc -->
+</ul>
+
+<hr>
+
+<p>
+    <a th:href="@{/logout}">Log out</a>
+</p>
+
 </body>
 </html>

@@ -2,14 +2,15 @@ package com.example.DevTrivia.admin.controller;
 
 import com.example.DevTrivia.auth.model.User;
 import com.example.DevTrivia.auth.repository.UserRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import java.time.Instant;
 import java.util.Optional;
 
@@ -25,32 +26,38 @@ public class AdminController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    /** /admin -> redirect to /admin/users */
-    @GetMapping("")
-    public String adminHome() {
-        return "redirect:/admin/users";
+    /** Simple admin landing page. */
+    @GetMapping
+    public String dashboard() {
+        return "admin/dashboard";
     }
 
-    /** List users + create form */
+    /** List users + show the create-user form. */
     @GetMapping("/users")
-    public String users(Model model) {
-        model.addAttribute("users", userRepo.findAll());
-        model.addAttribute("createForm", new CreateUserForm());
-        return "admin/users"; // templates/admin/users.html
-    }
-
-    /** Handle create user */
-    @PostMapping("/users")
-    public String createUser(@ModelAttribute("createForm") CreateUserForm form,
-                             BindingResult binding, Model model) {
-        if (binding.hasErrors()) {
-            model.addAttribute("users", userRepo.findAll());
-            return "admin/users";
+    public String listUsers(Model model) {
+        if (!model.containsAttribute("createForm")) {
+            model.addAttribute("createForm", new CreateUserForm());
         }
 
-        // minimal duplicate check
-        if (userRepo.findByUsername(form.getUsername()).isPresent()) {
-            binding.rejectValue("username", "dup", "Username already exists");
+        model.addAttribute("users", userRepo.findAll());
+        return "admin/users";
+    }
+
+    /** Handle create-user form submit. */
+    @PostMapping("/users")
+    public String createUser(
+            @Valid @ModelAttribute("createForm") CreateUserForm form,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        if (userRepo.existsByUsername(form.getUsername())) {
+            bindingResult.rejectValue("username", "duplicate", "Username already exists.");
+        }
+        if (userRepo.existsByEmail(form.getEmail())) {
+            bindingResult.rejectValue("email", "duplicate", "Email already exists.");
+        }
+
+        if (bindingResult.hasErrors()) {
             model.addAttribute("users", userRepo.findAll());
             return "admin/users";
         }
@@ -58,45 +65,64 @@ public class AdminController {
         User u = new User();
         u.setUsername(form.getUsername());
         u.setEmail(form.getEmail());
-        u.setAdmin(form.isAdmin());                 // requires setAdmin(boolean) on User
+        u.setPasswordHash(passwordEncoder.encode(form.getPassword()));
+
+        // admin / enabled flags
+        u.setAdmin(form.isAdmin());
+        u.setEnabled(form.isEnabled());  // defaults to true in the form
+
+        // stats / metadata
         u.setJoinDate(Instant.now());
-        if (form.getPassword() != null && !form.getPassword().isBlank()) {
-            u.setPasswordHash(passwordEncoder.encode(form.getPassword()));
-        }
+        u.setTotalCorrect(0);
+        u.setGamesPlayed(0);
+        // securityQuestion / Answer left null by default
 
         userRepo.save(u);
         return "redirect:/admin/users";
     }
 
-    /** Edit screen */
+    /** Show edit form for a specific user. */
     @GetMapping("/users/{id}/edit")
-    public String editUser(@PathVariable Long id, Model model) {
+    public String editUserForm(@PathVariable Long id, Model model) {
         Optional<User> opt = userRepo.findById(id);
-        if (opt.isEmpty()) return "redirect:/admin/users";
+        if (opt.isEmpty()) {
+            return "redirect:/admin/users";
+        }
+
         User u = opt.get();
+        EditUserForm form = new EditUserForm();
+        form.setId(u.getId());
+        form.setUsername(u.getUsername());
+        form.setEmail(u.getEmail());
+        form.setAdmin(u.isAdmin());
+        form.setEnabled(u.isEnabled());
 
-        EditUserForm f = new EditUserForm();
-        f.setId(u.getId());
-        f.setUsername(u.getUsername());
-        f.setEmail(u.getEmail());
-        f.setAdmin(Boolean.TRUE.equals(u.getIsAdmin()));
-
-        model.addAttribute("form", f);
-        return "admin/user-edit"; // templates/admin/user-edit.html
+        model.addAttribute("form", form);
+        return "admin/user_edit";
     }
 
-    /** Save edits */
+    /** Handle edit form submit. */
     @PostMapping("/users/{id}/edit")
-    public String updateUser(@PathVariable Long id,
-                             @ModelAttribute("form") EditUserForm form,
-                             BindingResult binding) {
+    public String editUser(
+            @PathVariable Long id,
+            @Valid @ModelAttribute("form") EditUserForm form,
+            BindingResult bindingResult,
+            Model model
+    ) {
         Optional<User> opt = userRepo.findById(id);
-        if (opt.isEmpty()) return "redirect:/admin/users";
+        if (opt.isEmpty()) {
+            return "redirect:/admin/users";
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "admin/user_edit";
+        }
 
         User u = opt.get();
         u.setUsername(form.getUsername());
         u.setEmail(form.getEmail());
         u.setAdmin(form.isAdmin());
+        u.setEnabled(form.isEnabled());
 
         if (form.getNewPassword() != null && !form.getNewPassword().isBlank()) {
             u.setPasswordHash(passwordEncoder.encode(form.getNewPassword()));
@@ -106,49 +132,121 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-    /** Delete */
-    @PostMapping("/users/{id}/delete")
-    public String deleteUser(@PathVariable Long id) {
-        if (userRepo.existsById(id)) {
-            userRepo.deleteById(id);
-        }
-        return "redirect:/admin/users";
-    }
+    // -------------------------------------------------------------------------
+    // Inner form classes for Create and Edit
+    // -------------------------------------------------------------------------
 
-    /* ---------- Simple DTOs for forms ---------- */
-
+    /** Form used on the /admin/users page when creating a new user. */
     public static class CreateUserForm {
-        @NotBlank private String username;
-        @Email   private String email;
+        @NotBlank
+        private String username;
+
+        @NotBlank
+        @Email
+        private String email;
+
+        @NotBlank
         private String password;
+
         private boolean admin;
 
-        public String getUsername() { return username; }
-        public void setUsername(String username) { this.username = username; }
-        public String getEmail() { return email; }
-        public void setEmail(String email) { this.email = email; }
-        public String getPassword() { return password; }
-        public void setPassword(String password) { this.password = password; }
-        public boolean isAdmin() { return admin; }
-        public void setAdmin(boolean admin) { this.admin = admin; }
+        // new field: default true so new users start enabled
+        private boolean enabled = true;
+
+        public String getUsername() {
+            return username;
+        }
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public boolean isAdmin() {
+            return admin;
+        }
+        public void setAdmin(boolean admin) {
+            this.admin = admin;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
     }
 
+    /** Form used on the /admin/users/{id}/edit page. */
     public static class EditUserForm {
         private Long id;
-        @NotBlank private String username;
-        @Email   private String email;
-        private boolean admin;
-        private String newPassword; // optional
 
-        public Long getId() { return id; }
-        public void setId(Long id) { this.id = id; }
-        public String getUsername() { return username; }
-        public void setUsername(String username) { this.username = username; }
-        public String getEmail() { return email; }
-        public void setEmail(String email) { this.email = email; }
-        public boolean isAdmin() { return admin; }
-        public void setAdmin(boolean admin) { this.admin = admin; }
-        public String getNewPassword() { return newPassword; }
-        public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
+        @NotBlank
+        private String username;
+
+        @NotBlank
+        @Email
+        private String email;
+
+        private boolean admin;
+
+        // enabled toggle for editing
+        private boolean enabled;
+
+        private String newPassword;  // optional
+
+        public Long getId() {
+            return id;
+        }
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public boolean isAdmin() {
+            return admin;
+        }
+        public void setAdmin(boolean admin) {
+            this.admin = admin;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getNewPassword() {
+            return newPassword;
+        }
+        public void setNewPassword(String newPassword) {
+            this.newPassword = newPassword;
+        }
     }
 }

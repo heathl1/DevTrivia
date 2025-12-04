@@ -35,9 +35,13 @@ public class User {
     @Column(name = "games_played", nullable = false)
     private Integer gamesPlayed = 0;
 
-    // IMPORTANT: Boolean wrapper to match possible NULLs in DB; default false.
+    // Existing admin flag
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin = false;
+
+    // NEW: enabled flag so we can disable accounts instead of deleting them
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = true;
 
     public User() {}
 
@@ -62,7 +66,7 @@ public class User {
     public void setSecurityAnswerHash(String securityAnswerHash) { this.securityAnswerHash = securityAnswerHash; }
 
     public Instant getJoinDate() { return joinDate; }
-    public void setJoinDate(Instant joinDate) { this.joinDate = joinDate; }  // <-- used by AdminController
+    public void setJoinDate(Instant joinDate) { this.joinDate = joinDate; }
 
     public Integer getTotalCorrect() { return totalCorrect; }
     public void setTotalCorrect(Integer totalCorrect) { this.totalCorrect = totalCorrect; }
@@ -70,12 +74,24 @@ public class User {
     public Integer getGamesPlayed() { return gamesPlayed; }
     public void setGamesPlayed(Integer gamesPlayed) { this.gamesPlayed = gamesPlayed; }
 
-    /** Preferred getter for security layer that expects Boolean wrapper. */
+    // ----- Admin helpers -----
     public Boolean getIsAdmin() { return isAdmin; }
 
-    /** Convenience boolean-style getter (not required but handy in templates). */
     public boolean isAdmin() { return Boolean.TRUE.equals(isAdmin); }
 
-    /** Setter used by AdminController#createUser and edit. */
     public void setAdmin(boolean admin) { this.isAdmin = admin; }
+
+    // ----- Enabled helpers -----
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    // This style works well with Spring Security (UserDetails.isEnabled)
+    public boolean isEnabled() {
+        return Boolean.TRUE.equals(enabled);
+    }
 }
