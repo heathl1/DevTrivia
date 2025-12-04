@@ -31,13 +31,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/guest", "/api/sessions")
+                        .ignoringRequestMatchers("/guest", "/api/sessions", "/logout")
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/sessions").permitAll()
-                        .requestMatchers("/", "/login", "/register", "/reset", "/guest", "/css/**", "/game.js").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/reset", "/guest",
+                                "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -46,10 +48,14 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutUrl("/logout")                  // GET now works
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
                 );
 
         return http.build();
     }
+
 }
