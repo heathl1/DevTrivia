@@ -36,21 +36,19 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers(
                         "/guest",        // POST for "play as guest"
                         "/register",     // POST register
-                        "/reset"         // POST password reset
+                        "/reset",         // POST password reset
+                        "/api/sessions"
                 ))
                 .authorizeHttpRequests(auth -> auth
                         // Static files
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-
+                        .requestMatchers("/", "/login", "/register", "/reset", "/guest",
+                                "/css/**", "/js/**").permitAll()
                         // Public pages (GET)
                         .requestMatchers(HttpMethod.GET, "/", "/login", "/register", "/reset").permitAll()
-
                         // Public form submits (POST)
-                        .requestMatchers(HttpMethod.POST, "/guest", "/register", "/reset").permitAll()
-
+                        .requestMatchers(HttpMethod.POST, "/guest", "/register", "/reset",  "/api/sessions").permitAll()
                         // Admin area
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-
                         // Everything else requires login
                         .anyRequest().authenticated()
                 )
@@ -60,9 +58,13 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutUrl("/logout")                  // GET now works
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
                 );
+
 
         return http.build();
     }

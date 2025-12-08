@@ -7,8 +7,7 @@ async function reloadAccount() {
     const statsEl = document.getElementById("stats");
     const sessionsEl = document.getElementById("sessions");
 
-    const message = await greetUser();
-    greetingEl.textContent = message;
+    greetingEl.textContent = await greetUser();
 
     await loadStats(statsEl);
     await loadSessions(sessionsEl);
@@ -103,7 +102,7 @@ async function loadSessions(root) {
 
     root.innerHTML = `
         <h3>Recent Sessions</h3>
-        <table>
+        <table border="1">
             <thead>
                 <tr><th>Score</th><th>Total Questions</th><th>Date</th></tr>
             </thead>

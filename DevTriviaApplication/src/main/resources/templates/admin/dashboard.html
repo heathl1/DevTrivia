@@ -15,8 +15,8 @@
 <ul>
     <!-- Change these hrefs so they match your actual routes -->
     <li><a th:href="@{/}">Player Home</a></li>
-    <li><a th:href="@{/play}">Play DevTrivia</a></li>
-    <li><a th:href="@{/profile}">My Profile</a></li>
+    <li><a th:href="@{/game}">Play DevTrivia</a></li>
+    <li><a th:href="@{/account}">My Account</a></li>
 </ul>
 
 <hr>
@@ -29,9 +29,9 @@
 
 <hr>
 
-<p>
-    <a th:href="@{/logout}">Log out</a>
-</p>
+<form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit">Logout</button>
+</form>
 
 </body>
 </html>

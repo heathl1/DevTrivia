@@ -20,12 +20,17 @@
 <h1>DevTrivia</h1>
 <nav>
     <ul>
-        <li><a href="/game">Play</a></li>
-        <li><a href="/forum">Forums</a></li>
-        <li><a href="/account">Account</a></li>
-        <li><a href="/logout">Logout</a></li>
+        <li><a th:href="@{/game}">Play</a></li>
+        <li><a th:href="@{/forum}">Forums</a></li>
+        <li><a th:href="@{/account}">Account</a></li>
+        <li>
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit">Logout</button>
+            </form>
+        </li>
     </ul>
 </nav>
+
 
 <!-- This is a short line to describe what my app is about. -->
 <p>Are you smarter than a Senior Dev?</p>

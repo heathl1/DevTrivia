@@ -7,6 +7,8 @@ import com.example.DevTrivia.auth.model.User;
 import com.example.DevTrivia.auth.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -118,8 +120,25 @@ public class AuthController {
         return "redirect:/";
     }
     @GetMapping("/")
-    public String home() {
-        return "index";   // templates/index.html
+    public String home(Authentication authentication) {
+
+        // Not logged in (or anonymous) → show normal home page
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "index";   // templates/index.html
+        }
+
+        // Check if user has ROLE_ADMIN
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+
+        if (isAdmin) {
+            // Admins land on /admin
+            return "redirect:/admin";
+        }
+
+        // Logged-in non-admins see index
+        return "index";
     }
 
     @GetMapping("/account")
