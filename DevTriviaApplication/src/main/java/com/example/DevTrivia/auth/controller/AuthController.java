@@ -24,9 +24,25 @@ public class AuthController {
     public AuthController(UserService userService) { this.userService = userService; }
 
     @GetMapping("/login")
-    public String getLogin(Model model, @RequestParam(value = "error", required = false) String error) {
+    public String getLogin(
+            Model model,
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String loggedOut,
+            @RequestParam(value = "registered", required = false) String registered,
+            @RequestParam(value = "reset", required = false) String reset
+    ) {
         model.addAttribute("form", new LoginForm());
-        if (error != null) model.addAttribute("message", "Invalid username or password.");
+
+        if (error != null) {
+            model.addAttribute("message", "Invalid username or password.");
+        } else if (loggedOut != null) {
+            model.addAttribute("message", "You have been logged out.");
+        } else if (registered != null) {
+            model.addAttribute("message", "Registration successful. Please log in.");
+        } else if (reset != null) {
+            model.addAttribute("message", "Password reset successful. Please log in.");
+        }
+
         return "login";
     }
 
@@ -100,5 +116,24 @@ public class AuthController {
     public String guest(HttpSession session) {
         session.setAttribute("guest", true);
         return "redirect:/";
+    }
+    @GetMapping("/")
+    public String home() {
+        return "index";   // templates/index.html
+    }
+
+    @GetMapping("/account")
+    public String account() {
+        return "account"; // templates/account.html
+    }
+
+    @GetMapping("/game")
+    public String game() {
+        return "game";    // templates/game.html
+    }
+
+    @GetMapping("/forum")
+    public String forum() {
+        return "forum";   // templates/forum.html
     }
 }
