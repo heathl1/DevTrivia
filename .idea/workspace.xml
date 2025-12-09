@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="- created basic directory structure&#10;- started basic html code for main web pages (index.html &amp; game.html)&#10;- added database file that shows table structure and current database entries">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/DevTrivia/controller/ForumController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/DevTrivia/model/ForumPost.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/DevTrivia/repository/ForumPostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/forum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DevTriviaApplication/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/DevTriviaApplication/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -46,11 +43,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="layla-main-10102025" />
+        <entry key="$PROJECT_DIR$" value="Kelli111025" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -62,23 +58,47 @@
   ],
   &quot;lastFilter&quot;: {}
 }</component>
-  <component name="GitHubPullRequestState">{
-  &quot;prStates&quot;: [
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
     {
-      &quot;id&quot;: {
-        &quot;id&quot;: &quot;PR_kwDOPyCSmc6tAh9f&quot;,
-        &quot;number&quot;: 2
+      "id": {
+        "id": "PR_kwDOPyCSmc6tAh9f",
+        "number": 2
       },
-      &quot;lastSeen&quot;: 1760900755268
+      "lastSeen": 1760900755268
+    },
+    {
+      "id": {
+        "id": "PR_kwDOPyCSmc6xhiGP",
+        "number": 5
+      },
+      "lastSeen": 1765148867571
+    },
+    {
+      "id": {
+        "id": "PR_kwDOPyCSmc6vbBMM",
+        "number": 3
+      },
+      "lastSeen": 1765148912946
+    },
+    {
+      "id": {
+        "id": "PR_kwDOPyCSmc6xFdoa",
+        "number": 4
+      },
+      "lastSeen": 1765148918233
     }
   ]
-}</component>
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/heathl1/DevTrivia.git&quot;,
     &quot;accountId&quot;: &quot;9acf3036-8753-4218-a7ed-8e3136f59d48&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/DevTrivia/controller/ForumController.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -135,7 +155,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.10834553",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JAVA",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -150,6 +171,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JKBar\IdeaProjects\DevTriviaApp\src\main\resources\static" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/lastcommit" />
       <recent name="$PROJECT_DIR$/database" />
@@ -160,7 +182,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="23" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="DevTriviaApplication" />
+      <module name="DevTriviaApplication (1)" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.DevTrivia.DevTriviaApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -184,6 +206,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="" />
@@ -217,6 +242,7 @@
       <workItem from="1760903011010" duration="1341000" />
       <workItem from="1762818633722" duration="105000" />
       <workItem from="1762818794529" duration="3394000" />
+      <workItem from="1765054020582" duration="39982000" />
     </task>
     <task id="LOCAL-00001" summary="- created basic directory structure&#10;- started basic html code for main web pages (index.html &amp; game.html)&#10;- added database file that shows table structure and current database entries">
       <option name="closed" value="true" />
