@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DevTrivia – Game</title>
+  <!-- Load the game logic after the DOM is parsed -->
+  <script src="/js/game.js" defer></script>
+
+  <!-- This page shows the trivia game screen for my DevTrivia project. -->
+</head>
+
+<body>
+<!-- Title with a link back to the home page -->
+<h1><a href="/">DevTrivia</a></h1>
+
+<nav>
+  <ul>
+    <li><a th:href="@{/game}">Play</a></li>
+    <li><a th:href="@{/forum}">Forums</a></li>
+    <li><a th:href="@{/account}">Account</a></li>
+    <li>
+      <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- Start game button -->
+<button id="play">Play</button>
+
+<!-- This container is where I will inject the question, choices, and result message. -->
+<div id="app"><p></p></div>
+
+<!-- Exit button (no form, handled entirely in JS) -->
+<button type="button" id="exit-button">Exit</button>
+</body>
+</html>

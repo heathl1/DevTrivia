@@ -1,7 +1,6 @@
 package com.example.DevTrivia.auth.security;
 
 import com.example.DevTrivia.auth.model.User;
-import com.example.DevTrivia.model.Session;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,15 +9,16 @@ import java.util.Collection;
 import java.util.List;
 
 public class AppUserDetails implements UserDetails {
+
     private final User user;
+
     public AppUserDetails(User user) { this.user = user; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (Boolean.TRUE.equals(user.getIsAdmin())) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        boolean admin = Boolean.TRUE.equals(user.getIsAdmin());
+        String role = admin ? "ROLE_ADMIN" : "ROLE_USER";
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override public String getPassword() { return user.getPasswordHash(); }
@@ -28,7 +28,5 @@ public class AppUserDetails implements UserDetails {
     @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return true; }
 
-    public User getUser() {
-        return this.user;
-    }
+    public User getUser() { return user; }
 }

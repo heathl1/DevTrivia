@@ -7,6 +7,8 @@ import com.example.DevTrivia.auth.model.User;
 import com.example.DevTrivia.auth.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +26,25 @@ public class AuthController {
     public AuthController(UserService userService) { this.userService = userService; }
 
     @GetMapping("/login")
-    public String getLogin(Model model, @RequestParam(value = "error", required = false) String error) {
+    public String getLogin(
+            Model model,
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String loggedOut,
+            @RequestParam(value = "registered", required = false) String registered,
+            @RequestParam(value = "reset", required = false) String reset
+    ) {
         model.addAttribute("form", new LoginForm());
-        if (error != null) model.addAttribute("message", "Invalid username or password.");
+
+        if (error != null) {
+            model.addAttribute("message", "Invalid username or password.");
+        } else if (loggedOut != null) {
+            model.addAttribute("message", "You have been logged out.");
+        } else if (registered != null) {
+            model.addAttribute("message", "Registration successful. Please log in.");
+        } else if (reset != null) {
+            model.addAttribute("message", "Password reset successful. Please log in.");
+        }
+
         return "login";
     }
 
@@ -100,5 +118,41 @@ public class AuthController {
     public String guest(HttpSession session) {
         session.setAttribute("guest", true);
         return "redirect:/";
+    }
+    @GetMapping("/")
+    public String home(Authentication authentication) {
+
+        // Not logged in (or anonymous) → show normal home page
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "index";   // templates/index.html
+        }
+
+        // Check if user has ROLE_ADMIN
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+
+        if (isAdmin) {
+            // Admins land on /admin
+            return "redirect:/admin";
+        }
+
+        // Logged-in non-admins see index
+        return "index";
+    }
+
+    @GetMapping("/account")
+    public String account() {
+        return "account"; // templates/account.html
+    }
+
+    @GetMapping("/game")
+    public String game() {
+        return "game";    // templates/game.html
+    }
+
+    @GetMapping("/forum")
+    public String forum() {
+        return "forum";   // templates/forum.html
     }
 }

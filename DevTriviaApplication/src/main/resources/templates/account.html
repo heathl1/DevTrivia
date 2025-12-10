@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Account</title>
+</head>
+<body>
+<h1><a href="/">DevTrivia</a></h1>
+<h2>Your Account</h2>
+<nav>
+  <ul>
+    <li><a th:href="@{/game}">Play</a></li>
+    <li><a th:href="@{/forum}">Forums</a></li>
+    <li><a th:href="@{/account}">Account</a></li>
+    <li>
+      <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+
+<div id="greeting"></div>
+<div id="stats"></div>
+<div id="sessions"></div>
+
+<!-- at the bottom of <body> -->
+<script src="/js/account.js"></script>
+
+</body>
+</html>

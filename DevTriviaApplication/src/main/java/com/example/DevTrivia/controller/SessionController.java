@@ -73,7 +73,7 @@ public class SessionController {
                     session.setCompletionDate(updatedSession.getCompletionDate());
                     return repository.save(session);
                 })
-        .orElseThrow(() -> new RuntimeException("Session not found"));
+                .orElseThrow(() -> new RuntimeException("Session not found"));
     }
 
     @DeleteMapping("/{id}")

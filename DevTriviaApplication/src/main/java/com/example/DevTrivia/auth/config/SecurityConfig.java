@@ -20,7 +20,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Ensure Spring uses our JPA UserDetailsService + BCrypt
+    // Use our JPA-backed UserDetailsService with BCrypt
     @Bean
     public DaoAuthenticationProvider authProvider(UserDetailsService uds, PasswordEncoder encoder) {
         DaoAuthenticationProvider p = new DaoAuthenticationProvider();
@@ -32,22 +32,39 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // 💡 CSRF: /guest is the only endpoint that should ignore CSRF for a POST request.
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/guest"))
+                // If your public forms don't include CSRF tokens yet, we can ignore CSRF for just these
+                .csrf(csrf -> csrf.ignoringRequestMatchers(
+                        "/guest",        // POST for "play as guest"
+                        "/register",     // POST register
+                        "/reset",         // POST password reset
+                        "/api/sessions"
+                ))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/sessions").authenticated() // ✅ Allow POST /api/sessions only for authenticated users
-                        .requestMatchers("/", "/login", "/register", "/reset", "/guest", "/css/**", "/game.js").permitAll()
+                        // Static files
+                        .requestMatchers("/", "/login", "/register", "/reset", "/guest",
+                                "/css/**", "/js/**").permitAll()
+                        // Public pages (GET)
+                        .requestMatchers(HttpMethod.GET, "/", "/login", "/register", "/reset").permitAll()
+                        // Public form submits (POST)
+                        .requestMatchers(HttpMethod.POST, "/guest", "/register", "/reset",  "/api/sessions").permitAll()
+                        // Admin area
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        // Everything else requires login
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)   // change to /lobby if you want
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutUrl("/logout")                  // GET now works
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
                 );
+
 
         return http.build();
     }
