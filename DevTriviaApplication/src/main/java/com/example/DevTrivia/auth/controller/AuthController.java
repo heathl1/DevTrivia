@@ -150,9 +150,13 @@ public class AuthController {
     public String game() {
         return "game";    // templates/game.html
     }
-
+/*
     @GetMapping("/forum")
     public String forum() {
         return "forum";   // templates/forum.html
     }
+
+
+ */
+
 }
