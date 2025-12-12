@@ -22,9 +22,12 @@
     <a href="/" class="forum-logo">DevTrivia<span>Forum</span></a>
 
     <nav class="forum-nav" aria-label="Primary">
-      <a href="/" class="forum-nav-link">Play</a>
+      <a href="/game" class="forum-nav-link">Play</a>
       <a href="/account" class="forum-nav-link">Account</a>
       <a href="/forum" class="forum-nav-link forum-nav-link-active" aria-current="page">Forum</a>
+      <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
     </nav>
   </div>
 </header>
@@ -44,7 +47,7 @@
       <h2 id="new-post-heading">Start a new post</h2>
 
       <form th:action="@{/forum}" th:object="${newPost}" method="post" class="forum-form" novalidate>
-        <div class="forum-form-group">
+        <!--<div class="forum-form-group">
           <label for="userId">
             User ID <span class="required-indicator" aria-hidden="true">*</span>
           </label>
@@ -58,7 +61,7 @@
                  required
                  aria-required="true"
                  aria-describedby="userId-help">
-        </div>
+        </div> -->
 
         <div class="forum-form-group">
           <label for="content">

@@ -19,19 +19,23 @@
 
 <body>
 <!-- This is the main title of my web app. I want it to be the first thing people see. -->
-<h1>DevTrivia</h1>
-<nav>
-    <ul>
-        <li><a th:href="@{/game}">Play</a></li>
-        <li><a th:href="@{/forum}">Forums</a></li>
-        <li><a th:href="@{/account}">Account</a></li>
-        <li>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Header and Nav -->
+<header class="forum-header">
+    <div class="forum-header-inner">
+        <a href="/" class="forum-logo">DevTrivia<span>Forum</span></a>
+
+        <nav class="forum-nav" aria-label="Primary">
+            <a href="/game" class="forum-nav-link">Play</a>
+            <a href="/account" class="forum-nav-link">Account</a>
+            <a href="/forum" class="forum-nav-link">Forum</a>
             <form th:action="@{/logout}" method="post" style="display:inline;">
                 <button type="submit">Logout</button>
             </form>
-        </li>
-    </ul>
-</nav>
+        </nav>
+    </div>
+</header>
 
 
 <!-- This is a short line to describe what my app is about. -->

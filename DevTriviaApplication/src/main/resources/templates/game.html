@@ -6,6 +6,7 @@
   <!-- Load the game logic after the DOM is parsed -->
   <script src="/js/game.js" defer></script>
   <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/gameStyle.css}">
   <!--static/css/style.css-->
 
   <!-- This page shows the trivia game screen for my DevTrivia project. -->
@@ -13,27 +14,29 @@
 
 <body>
 <!-- Title with a link back to the home page -->
-<h1><a href="/">DevTrivia</a></h1>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav>
-  <ul>
-    <li><a th:href="@{/game}">Play</a></li>
-    <li><a th:href="@{/forum}">Forums</a></li>
-    <li><a th:href="@{/account}">Account</a></li>
-    <li>
+<!-- Header and Nav -->
+<header class="forum-header">
+  <div class="forum-header-inner">
+    <a href="/" class="forum-logo">DevTrivia<span>Play</span></a>
+
+    <nav class="forum-nav" aria-label="Primary">
+      <a href="/game" class="forum-nav-link forum-nav-link-active" aria-current="page">Play</a>
+      <a href="/account" class="forum-nav-link">Account</a>
+      <a href="/forum" class="forum-nav-link">Forum</a>
       <form th:action="@{/logout}" method="post" style="display:inline;">
         <button type="submit">Logout</button>
       </form>
-    </li>
-  </ul>
-</nav>
-
+    </nav>
+  </div>
+</header>
 
 <!-- Start game button -->
-<button id="play">Play</button>
+
 
 <!-- This container is where I will inject the question, choices, and result message. -->
-<div id="app"><p></p></div>
+<div id="app"><p><button id="play">Play</button></p></div>
 
 <!-- Exit button (no form, handled entirely in JS) -->
 <button type="button" id="exit-button">Exit</button>

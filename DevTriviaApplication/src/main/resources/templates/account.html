@@ -4,23 +4,29 @@
   <meta charset="UTF-8">
   <title>Account</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/forumStyle.css}">
+
 
 </head>
 <body>
-<h1><a href="/">DevTrivia</a></h1>
-<h2>Your Account</h2>
-<nav>
-  <ul>
-    <li><a th:href="@{/game}">Play</a></li>
-    <li><a th:href="@{/forum}">Forums</a></li>
-    <li><a th:href="@{/account}">Account</a></li>
-    <li>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Header and Nav -->
+<header class="forum-header">
+  <div class="forum-header-inner">
+    <a href="/" class="forum-logo">DevTrivia<span>Account</span></a>
+
+    <nav class="forum-nav" aria-label="Primary">
+      <a href="/game" class="forum-nav-link">Play</a>
+      <a href="/account" class="forum-nav-link forum-nav-link-active" aria-current="page">Account</a>
+      <a href="/forum" class="forum-nav-link">Forum</a>
       <form th:action="@{/logout}" method="post" style="display:inline;">
         <button type="submit">Logout</button>
       </form>
-    </li>
-  </ul>
-</nav>
+    </nav>
+  </div>
+</header>
 
 
 <div id="greeting"></div>

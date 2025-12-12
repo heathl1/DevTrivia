@@ -3,35 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>DevTrivia Admin Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
 </head>
 <body>
-<h1>DevTrivia Admin Home</h1>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<p>Welcome, admin. From here you can do everything a normal player can do plus manage users.</p>
+<!-- Header and Nav -->
+<header class="forum-header">
+    <div class="forum-header-inner">
+        <a href="/" class="forum-logo">DevTrivia<span>AdminHome</span></a>
+
+        <nav class="forum-nav" aria-label="Primary">
+            <a href="/game" class="forum-nav-link">Play</a>
+            <a href="/account" class="forum-nav-link">Account</a>
+            <a href="/forum" class="forum-nav-link">Forum</a>
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit">Logout</button>
+            </form>
+        </nav>
+    </div>
+</header>
 
 <hr>
 
-<h2>Regular options</h2>
+<h3>Admin options</h3>
 <ul>
-    <!-- Change these hrefs so they match your actual routes -->
-    <li><a th:href="@{/}">Player Home</a></li>
-    <li><a th:href="@{/game}">Play DevTrivia</a></li>
-    <li><a th:href="@{/account}">My Account</a></li>
-</ul>
-
-<hr>
-
-<h2>Admin options</h2>
-<ul>
-    <li><a th:href="@{/admin/users}">Manage Users</a></li>
+    <p><a th:href="@{/admin/users}">Manage Users</a></p>
     <!-- later you can add more like manage questions, view stats, etc -->
 </ul>
 
 <hr>
-
-<form th:action="@{/logout}" method="post" style="display:inline;">
-    <button type="submit">Logout</button>
-</form>
-
 </body>
 </html>
