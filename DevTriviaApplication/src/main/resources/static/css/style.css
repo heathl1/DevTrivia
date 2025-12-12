@@ -173,3 +173,39 @@ body {
     filter: brightness(1.08);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
 }
+
+/* Admin users – disabled rows */
+.user-disabled {
+    opacity: 0.55;
+    background-color: #f2f2f2;
+}
+
+.user-disabled td {
+    color: #666;
+}
+
+/* Admin layout */
+.admin-wrapper {
+    max-width: 1080px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.admin-card {
+    background: var(--forum-bg-elevated);
+    border-radius: var(--forum-radius-lg);
+    padding: 28px;
+    box-shadow: var(--forum-shadow-soft);
+}
+
+.admin-card h1,
+.admin-card h2 {
+    margin-top: 0;
+}
+
+.admin-card hr {
+    border: none;
+    height: 1px;
+    background: var(--forum-border-subtle);
+    margin: 24px 0;
+}

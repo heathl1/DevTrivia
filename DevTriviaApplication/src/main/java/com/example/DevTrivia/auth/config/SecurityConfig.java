@@ -1,15 +1,22 @@
 package com.example.DevTrivia.auth.config;
 
+import com.example.DevTrivia.auth.repository.UserRepository;
+import com.example.DevTrivia.auth.security.DisabledUserLogoutFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableMethodSecurity
@@ -29,42 +36,74 @@ public class SecurityConfig {
         return p;
     }
 
+    // Tracks active sessions so we can expire them later if needed
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    // Keeps SessionRegistry in sync with session lifecycle
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(
+            HttpSecurity http,
+            UserRepository userRepository,
+            SessionRegistry sessionRegistry
+    ) throws Exception {
+
         http
-                // If your public forms don't include CSRF tokens yet, we can ignore CSRF for just these
                 .csrf(csrf -> csrf.ignoringRequestMatchers(
-                        "/guest",        // POST for "play as guest"
-                        "/register",     // POST register
-                        "/reset",         // POST password reset
+                        "/register",
+                        "/reset",
                         "/api/sessions"
                 ))
+
+                // If a logged-in user becomes disabled in the DB, kick them out on the next request
+                .addFilterBefore(new DisabledUserLogoutFilter(userRepository),
+                        UsernamePasswordAuthenticationFilter.class)
+
+                // Session tracking (optional, but keep it since you mentioned "logout everywhere")
+                .sessionManagement(session -> session
+                        .maximumSessions(-1)
+                        .sessionRegistry(sessionRegistry)
+                )
+
                 .authorizeHttpRequests(auth -> auth
-                        // Static files
-                        .requestMatchers("/", "/login", "/register", "/reset", "/guest",
+                        .requestMatchers("/", "/login", "/register", "/reset",
                                 "/css/**", "/js/**").permitAll()
-                        // Public pages (GET)
                         .requestMatchers(HttpMethod.GET, "/", "/login", "/register", "/reset").permitAll()
-                        // Public form submits (POST)
-                        .requestMatchers(HttpMethod.POST, "/guest", "/register", "/reset",  "/api/sessions").permitAll()
-                        // Admin area
+                        .requestMatchers(HttpMethod.POST, "/register", "/reset", "/api/sessions").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        // Everything else requires login
                         .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
+
+                        // KEY CHANGE: show disabled message when account is disabled
+                        .failureHandler((request, response, exception) -> {
+                            if (exception instanceof DisabledException) {
+                                response.sendRedirect("/login?disabled");
+                            } else {
+                                response.sendRedirect("/login?error");
+                            }
+                        })
+
                         .permitAll()
                 )
+
                 .logout(logout -> logout
-                        .logoutUrl("/logout")                  // GET now works
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
                 );
-
 
         return http.build();
     }
