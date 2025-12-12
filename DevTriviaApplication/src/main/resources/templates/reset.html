@@ -8,6 +8,7 @@
 
 </head>
 <body>
+<main class="auth-wrapper">
 <div class="card">
     <h1>Reset password</h1>
     <p class="err" th:if="${message}" th:text="${message}"></p>
@@ -26,12 +27,13 @@
         <label>New Password
             <input type="password" th:field="*{newPassword}" required minlength="8">
         </label>
-        <button type="submit">Change Password</button>
+        <button type="submit" class="btn-primary auth-primary">Change Password</button>
     </form>
 
     <div class="muted">
         <a th:href="@{/login}">Back to sign in</a>
     </div>
 </div>
+</main>
 </body>
 </html>

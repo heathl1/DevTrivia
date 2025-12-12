@@ -18,15 +18,17 @@
 
 <!-- Header and Nav -->
 <header class="forum-header">
-  <div class="forum-header-inner">
+<div class="forum-header-inner">
     <a href="/" class="forum-logo">DevTrivia<span>Forum</span></a>
-
     <nav class="forum-nav" aria-label="Primary">
-      <a href="/" class="forum-nav-link">Play</a>
-      <a href="/account" class="forum-nav-link">Account</a>
-      <a href="/forum" class="forum-nav-link forum-nav-link-active" aria-current="page">Forum</a>
+        <a href="/" class="forum-nav-link">Play</a>
+        <a href="/account" class="forum-nav-link">Account</a>
+        <a href="/forum" class="forum-nav-link forum-nav-link-active" aria-current="page">Forum</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="btn-primary">Logout</button>
+        </form>
     </nav>
-  </div>
+</div>
 </header>
 
 <!-- Main Content Section -->

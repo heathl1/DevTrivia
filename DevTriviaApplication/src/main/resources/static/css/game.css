@@ -1,0 +1,54 @@
+/* Game Layout */
+.game-wrapper {
+    max-width: 700px;
+    margin: 140px auto 0;
+    padding: 0 24px;
+    text-align: center;
+}
+/* Btns */
+#play,
+#exit-button {
+    margin-top: 20px;
+}
+/* Game Container */
+#app {
+    margin-top: 30px;
+    padding: 24px;
+    background: var(--forum-bg-elevated);
+    border-radius: 16px;
+    box-shadow: var(--forum-shadow-soft);
+    min-height: 120px;
+    text-align: left;
+}
+/* Question text */
+#app p {
+    font-size: 1rem;
+    color: var(--forum-text);
+    margin: 0;
+}
+/* Tweaks game buttons */
+.game-btn {
+    margin-top: 12px;
+    min-width: 140px;
+}
+
+/* Other btns */
+.game-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+#submit.game-btn{
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+#next.game-btn {
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+.game-wrapper button {
+    margin-top: 20px;
+}
+
+

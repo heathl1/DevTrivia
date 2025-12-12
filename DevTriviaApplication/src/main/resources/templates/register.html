@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8"><title>DevTrivia – Register</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
 </head>
 <body>
+<main class="auth-wrapper">
+    <section class="auth-card">
 <h1>Create Account</h1>
 
 <p th:if="${message}" th:text="${message}" style="color:red"></p>
@@ -24,9 +26,11 @@
 
     <label>Security Answer <input type="text" th:field="*{securityAnswer}" required></label><br>
 
-    <button type="submit">Register</button>
+    <button type="submit" class="btn-primary auth-primary">Register</button>
 </form>
 
 <p>Already have an account? <a th:href="@{/login}">Log in</a></p>
+    </section>
+</main>
 </body>
 </html>

@@ -75,8 +75,9 @@ function loadQuestion(index, questions, root) {
     <div id="question">
       <h3>${q.text}</h3>
       <ol id="choices"></ol>
-      <button id="submit" disabled>Submit</button><br/>
-      <button id="next" disabled>Next</button>
+       <button id="submit" class="btn-primary game-btn" disabled>Submit</button><br/>
+       <p/>
+       <button id="next" class="btn-secondary game-btn" disabled>Next</button>
     </div>
     <p id="result"></p>
   `;

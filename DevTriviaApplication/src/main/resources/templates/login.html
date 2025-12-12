@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>DevTrivia – Login</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/auth.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<main class="auth-wrapper">
+    <section class="auth-card">
 <h1>Login</h1>
 
 <!-- message area -->
@@ -21,7 +27,7 @@
     <label>Password
         <input type="password" name="password" required>
     </label><br>
-    <button type="submit">Sign in</button>
+    <button type="submit" class="btn-primary auth-primary">Sign in</button>
 </form>
 
 <hr>
@@ -32,8 +38,9 @@
 
 <!-- Guest play posts to /guest -->
 <form th:action="@{/guest}" method="post">
-    <button type="submit">Play as guest</button>
+    <button type="submit" class="btn-secondary auth-secondary">Play as guest</button>
 </form>
-
+    </section>
+</main>
 </body>
 </html>
