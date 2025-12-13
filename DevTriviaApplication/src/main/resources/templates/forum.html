@@ -46,7 +46,8 @@
       <h2 id="new-post-heading">Start a new post</h2>
 
       <form th:action="@{/forum}" th:object="${newPost}" method="post" class="forum-form" novalidate>
-        <div class="forum-form-group">
+          <!--
+          <div class="forum-form-group">
           <label for="userId">
             User ID <span class="required-indicator" aria-hidden="true">*</span>
           </label>
@@ -61,6 +62,7 @@
                  aria-required="true"
                  aria-describedby="userId-help">
         </div>
+        -->
 
         <div class="forum-form-group">
           <label for="content">
