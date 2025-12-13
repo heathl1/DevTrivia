@@ -21,7 +21,7 @@
 <div class="forum-header-inner">
     <a href="/" class="forum-logo">DevTrivia<span>Forum</span></a>
     <nav class="forum-nav" aria-label="Primary">
-        <a href="/" class="forum-nav-link">Play</a>
+        <a href="/game" class="forum-nav-link">Play</a>
         <a href="/account" class="forum-nav-link">Account</a>
         <a href="/forum" class="forum-nav-link forum-nav-link-active" aria-current="page">Forum</a>
         <form th:action="@{/logout}" method="post" class="logout-form">
@@ -46,23 +46,7 @@
       <h2 id="new-post-heading">Start a new post</h2>
 
       <form th:action="@{/forum}" th:object="${newPost}" method="post" class="forum-form" novalidate>
-          <!--
-          <div class="forum-form-group">
-          <label for="userId">
-            User ID <span class="required-indicator" aria-hidden="true">*</span>
-          </label>
-          <span id="userId-help" class="field-help">
-                        Enter the numeric ID associated with your DevTrivia account.
-                    </span>
-          <input id="userId"
-                 type="number"
-                 th:field="*{userId}"
-                 placeholder="Enter your user id"
-                 required
-                 aria-required="true"
-                 aria-describedby="userId-help">
-        </div>
-        -->
+
 
         <div class="forum-form-group">
           <label for="content">
@@ -111,7 +95,7 @@
             <div class="forum-post-meta">
                             <span class="forum-post-author">
                                 <span class="sr-only">Posted by</span>
-                                User #<strong th:text="${post.userId}">1</strong>
+                                <strong th:text="${post.username}">username</strong>
                             </span>
 
               <!-- Format Local time/date of post -->

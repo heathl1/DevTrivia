@@ -6,7 +6,19 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-
+<div class="forum-header-inner">
+    <a href="/" class="forum-logo">
+        DevTrivia<span>Admin</span>
+    </a>
+    <nav class="forum-nav">
+        <a th:href="@{/game}" class="forum-nav-link">Play</a>
+        <a th:href="@{/account}" class="forum-nav-link">Account</a>
+        <a th:href="@{/forum}" class="forum-nav-link">Forum</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="btn-primary">Logout</button>
+        </form>
+    </nav>
+</div>
 <div class="admin-wrapper">
     <div class="admin-card">
 
@@ -17,22 +29,23 @@
         </p>
 
         <hr>
+        <h2>Admin options</h2>
+        <ul>
+            <li><a th:href="@{/}">Admin Home</a></li>
+            <li><a th:href="@{/admin/users}">Manage Users</a></li>
+        </ul>
+
+        <hr>
 
         <h2>Player options</h2>
         <ul>
-            <li><a th:href="@{/}">Player Home</a></li>
+
             <li><a th:href="@{/game}">Play DevTrivia</a></li>
             <li><a th:href="@{/account}">My Account</a></li>
         </ul>
 
         <hr>
 
-        <h2>Admin options</h2>
-        <ul>
-            <li><a th:href="@{/admin/users}">Manage Users</a></li>
-        </ul>
-
-        <hr>
 
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn-secondary">Logout</button>
