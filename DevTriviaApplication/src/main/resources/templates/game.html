@@ -6,39 +6,37 @@
   <!-- Load the game logic after the DOM is parsed -->
   <script src="/js/game.js" defer></script>
   <link rel="stylesheet" th:href="@{/css/style.css}">
-  <link rel="stylesheet" th:href="@{/css/gameStyle.css}">
   <!--static/css/style.css-->
 
   <!-- This page shows the trivia game screen for my DevTrivia project. -->
 </head>
 
 <body>
-<!-- Title with a link back to the home page -->
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
-<!-- Header and Nav -->
 <header class="forum-header">
-  <div class="forum-header-inner">
-    <a href="/" class="forum-logo">DevTrivia<span>Play</span></a>
-
-    <nav class="forum-nav" aria-label="Primary">
-      <a href="/game" class="forum-nav-link forum-nav-link-active" aria-current="page">Play</a>
-      <a href="/account" class="forum-nav-link">Account</a>
-      <a href="/forum" class="forum-nav-link">Forum</a>
-      <form th:action="@{/logout}" method="post" style="display:inline;">
-        <button type="submit">Logout</button>
-      </form>
-    </nav>
-  </div>
+    <div class="forum-header-inner">
+        <a href="/" class="forum-logo">
+            DevTrivia<span>Game</span>
+        </a>
+        <nav class="forum-nav">
+            <a th:href="@{/game}" class="forum-nav-link forum-nav-link-active">Play</a>
+            <a th:href="@{/forum}" class="forum-nav-link">Forum</a>
+            <a th:href="@{/account}" class="forum-nav-link">Account</a>
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit" class="btn-primary">Logout</button>
+            </form>
+        </nav>
+    </div>
 </header>
 
+<main class="game-wrapper">
 <!-- Start game button -->
-
+    <button id="play" class="btn-primary">Play</button>
 
 <!-- This container is where I will inject the question, choices, and result message. -->
-<div id="app"><p><button id="play">Play</button></p></div>
+<div id="app"><p></p></div>
 
 <!-- Exit button (no form, handled entirely in JS) -->
-<button type="button" id="exit-button">Exit</button>
+    <button type="button" id="exit-button" class="btn-secondary">Exit</button>
+</main>
 </body>
 </html>

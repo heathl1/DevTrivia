@@ -12,7 +12,9 @@ public class AppUserDetails implements UserDetails {
 
     private final User user;
 
-    public AppUserDetails(User user) { this.user = user; }
+    public AppUserDetails(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -21,12 +23,40 @@ public class AppUserDetails implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role));
     }
 
-    @Override public String getPassword() { return user.getPasswordHash(); }
-    @Override public String getUsername() { return user.getUsername(); }
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
-    @Override public boolean isEnabled() { return true; }
+    @Override
+    public String getPassword() {
+        return user.getPasswordHash();
+    }
 
-    public User getUser() { return user; }
+    @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    // Not using these features yet, so they are always true
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    // ✅ THIS is the important fix
+    @Override
+    public boolean isEnabled() {
+        return Boolean.TRUE.equals(user.isEnabled());
+    }
+
+    // Optional helper if you need access to the entity later
+    public User getUser() {
+        return user;
+    }
 }

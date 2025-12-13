@@ -1,32 +1,87 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8"><title>DevTrivia – Register</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-
+    <meta charset="UTF-8">
+    <title>DevTrivia – Register</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/auth.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Create Account</h1>
 
-<p th:if="${message}" th:text="${message}" style="color:red"></p>
+<main class="auth-wrapper">
+    <section class="auth-card">
+        <h1>Create Account</h1>
 
-<form th:action="@{/register}" method="post" th:object="${form}">
-    <label>Username <input type="text" th:field="*{username}" required></label><br>
-    <label>Email <input type="email" th:field="*{email}" required></label><br>
-    <label>Password <input type="password" th:field="*{password}" required></label><br>
-    <label>Confirm Password <input type="password" th:field="*{confirmPassword}" required></label><br>
+        <!-- Generic message area (your controller uses model.addAttribute("message", ...)) -->
+        <p th:if="${message}" th:text="${message}" style="color:red"></p>
 
-    <label>Security Question
-        <select th:field="*{securityQuestion}">
-            <option th:each="q : ${questions}" th:value="${q}" th:text="${q}"></option>
-        </select>
-    </label><br>
+        <!-- IMPORTANT: th:object is required for th:field and #fields.hasErrors to work -->
+        <form th:action="@{/register}" th:object="${form}" method="post">
 
-    <label>Security Answer <input type="text" th:field="*{securityAnswer}" required></label><br>
+            <!-- Form-level errors (like @AssertTrue passwords match) -->
+            <div th:if="${#fields.hasGlobalErrors()}" style="color:red; margin-bottom:10px;">
+                <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+            </div>
 
-    <button type="submit">Register</button>
-</form>
+            <label>Username
+                <input type="text" th:field="*{username}" required>
+            </label>
+            <div th:if="${#fields.hasErrors('username')}" style="color:red">
+                <p th:errors="*{username}"></p>
+            </div>
 
-<p>Already have an account? <a th:href="@{/login}">Log in</a></p>
+            <label>Email (optional)
+                <input type="email" th:field="*{email}">
+            </label>
+            <div th:if="${#fields.hasErrors('email')}" style="color:red">
+                <p th:errors="*{email}"></p>
+            </div>
+
+            <label>Password
+                <input type="password" th:field="*{password}" required>
+            </label>
+            <div style="font-size:0.9em; margin-top:6px; opacity:0.9;">
+                Password must include an uppercase letter, a lowercase letter, a number, and a special character.
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" style="color:red">
+                <p th:errors="*{password}"></p>
+            </div>
+
+            <label>Confirm Password
+                <input type="password" th:field="*{confirmPassword}" required>
+            </label>
+            <div th:if="${#fields.hasErrors('confirmPassword')}" style="color:red">
+                <p th:errors="*{confirmPassword}"></p>
+            </div>
+
+            <label>Security Question
+                <select th:field="*{securityQuestion}" required>
+                    <option value="" disabled selected>Select a question</option>
+                    <option th:each="q : ${questions}" th:value="${q}" th:text="${q}"></option>
+                </select>
+            </label>
+            <div th:if="${#fields.hasErrors('securityQuestion')}" style="color:red">
+                <p th:errors="*{securityQuestion}"></p>
+            </div>
+
+            <label>Security Answer
+                <input type="text" th:field="*{securityAnswer}" required>
+            </label>
+            <div th:if="${#fields.hasErrors('securityAnswer')}" style="color:red">
+                <p th:errors="*{securityAnswer}"></p>
+            </div>
+
+            <button type="submit" class="btn-primary auth-primary">Register</button>
+        </form>
+
+        <hr>
+
+        <p><a th:href="@{/login}">Back to login</a></p>
+    </section>
+</main>
+
 </body>
 </html>

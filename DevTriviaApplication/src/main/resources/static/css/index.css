@@ -1,0 +1,31 @@
+/* Landing Page */
+.landing-wrapper {
+    max-width: 700px;
+    margin: 140px auto 0;
+    padding: 0 24px;
+    text-align: center;
+}
+.landing-title {
+    font-size: 3.4rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin: 0 0 12px;
+    color: var(--forum-text);
+}
+.landing-tagline {
+    font-size: 1.2rem;
+    color: var(--forum-text-muted);
+    margin-bottom: 40px;
+}
+.landing-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 260px;
+    margin: auto;
+}
+.landing-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}

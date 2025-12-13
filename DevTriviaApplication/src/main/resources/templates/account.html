@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Account</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-  <link rel="stylesheet" th:href="@{/css/forumStyle.css}">
-
+    <meta charset="UTF-8">
+    <title>Account • DevTrivia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DevTrivia Account Page.">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/account.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 </head>
-<body>
-
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
-<!-- Header and Nav -->
+<!-- Reuse from Forum -->
 <header class="forum-header">
-  <div class="forum-header-inner">
-    <a href="/" class="forum-logo">DevTrivia<span>Account</span></a>
-
-    <nav class="forum-nav" aria-label="Primary">
-      <a href="/game" class="forum-nav-link">Play</a>
-      <a href="/account" class="forum-nav-link forum-nav-link-active" aria-current="page">Account</a>
-      <a href="/forum" class="forum-nav-link">Forum</a>
-      <form th:action="@{/logout}" method="post" style="display:inline;">
-        <button type="submit">Logout</button>
-      </form>
-    </nav>
-  </div>
+    <div class="forum-header-inner">
+        <a href="/" class="forum-logo">
+            DevTrivia<span>Account</span>
+        </a>
+        <nav class="forum-nav">
+            <a th:href="@{/game}" class="forum-nav-link">Play</a>
+            <a th:href="@{/forum}" class="forum-nav-link">Forum</a>
+            <a th:href="@{/account}" class="forum-nav-link forum-nav-link-active">Account</a>
+            <form th:action="@{/logout}" method="post" class="forum-nav-logout">
+                <button type="submit" class="forum-nav-logout-button">Logout</button>
+            </form>
+        </nav>
+    </div>
 </header>
 
+<main class="account-wrapper">
+    <section class="account-card">
+        <!-- JS fills these three areas -->
+        <header id="greeting" class="account-card-header"></header>
+        <section id="stats" class="account-section account-section-stats"></section>
+        <section id="sessions" class="account-section account-section-sessions"></section>
+    </section>
+</main>
 
-<div id="greeting"></div>
-<div id="stats"></div>
-<div id="sessions"></div>
 
-<!-- at the bottom of <body> -->
+<!-- script -->
 <script src="/js/account.js"></script>
 
 </body>

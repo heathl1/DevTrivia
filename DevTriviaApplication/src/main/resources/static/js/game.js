@@ -2,6 +2,9 @@
 let score = 0;
 let total_questions = 0;
 
+// Game configuration
+const MAX_QUESTIONS = 10;
+
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('app');
     const play = document.getElementById('play');
@@ -19,14 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const questions = await res.json();
 
-            const startIndex = 78;
-            loadQuestion(startIndex, questions, root);
+            // Shuffle questions and take first 10
+            const shuffled = shuffleArray(questions);
+            const quizQuestions = shuffled.slice(0, MAX_QUESTIONS);
+
+            loadQuestion(0, quizQuestions, root);
 
         } catch (e) {
             root.innerHTML = `
-        <p>Failed to load question: ${e}</p>
-        <p>Please make sure the server is running and try opening <code>/api/questions</code> directly.</p>
-      `;
+                <p>Failed to load question: ${e}</p>
+                <p>Please make sure the server is running and try opening <code>/api/questions</code> directly.</p>
+            `;
         }
     });
 
@@ -39,29 +45,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 score: score,
                 total_questions: total_questions
             };
-            if (total_questions > 0) {
-                try {
-                    const res = await fetch('/api/sessions', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    });
 
-                    if (!res.ok) {
-                        console.error('Failed to save session:', res.status);
-                        alert('Could not save your score (status ' + res.status + ').');
-                    } else {
-                        window.location.href = '/';
-                    }
+            try {
+                const res = await fetch('/api/sessions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
 
-                } catch (err) {
-                    console.error('Error saving session:', err);
-                    alert('An error occurred while saving your score.');
+                if (!res.ok) {
+                    console.error('Failed to save session:', res.status);
+                    alert('Could not save your score.');
+                } else {
+                    window.location.href = '/';
                 }
+
+            } catch (err) {
+                console.error('Error saving session:', err);
+                alert('An error occurred while saving your score.');
             }
-            window.location.href = '/';
         });
     }
 });
@@ -74,16 +78,17 @@ function loadQuestion(index, questions, root) {
     const optionTexts = [q.optionA, q.optionB, q.optionC, q.optionD];
 
     root.innerHTML = `
-    <div id="question">
-      <h3>${q.text}</h3>
-      <ol id="choices"></ol>
-      <button id="submit" disabled>Submit</button><br/>
-      <button id="next" disabled>Next</button>
-    </div>
-    <p id="result"></p>
-  `;
+        <div id="question">
+            <h3>Question ${index + 1} of ${MAX_QUESTIONS}</h3>
+            <h4>${q.text}</h4>
+            <ol id="choices"></ol>
 
-    const question = document.getElementById('question');
+            <button id="submit" class="btn-primary game-btn" disabled>Submit</button><br/><br/>
+            <button id="next" class="btn-secondary game-btn" disabled>Next</button>
+        </div>
+        <p id="result"></p>
+    `;
+
     const choicesEl = document.getElementById('choices');
     const submit = document.getElementById('submit');
     const next = document.getElementById('next');
@@ -92,7 +97,12 @@ function loadQuestion(index, questions, root) {
     // Build choices list
     optionTexts.forEach((text) => {
         const li = document.createElement('li');
-        li.innerHTML = `<label><input type="radio" name="ans" value="${text}">${text}</label>`;
+        li.innerHTML = `
+            <label>
+                <input type="radio" name="ans" value="${text}">
+                ${text}
+            </label>
+        `;
         choicesEl.appendChild(li);
     });
 
@@ -121,7 +131,7 @@ function loadQuestion(index, questions, root) {
         submit.disabled = true;
 
         // Disable further changes
-        choicesEl.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        choicesEl.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.disabled = true;
         });
     });
@@ -129,14 +139,26 @@ function loadQuestion(index, questions, root) {
     // Handle moving to the next question
     next.addEventListener('click', () => {
         if (index + 1 < questions.length) {
-            next.disabled = true;
             loadQuestion(index + 1, questions, root);
         } else {
             // End of quiz
-            question.style.display = 'none';
-            submit.style.display = 'none';
-            next.style.display = 'none';
-            result.textContent = `Your Score is ${score}/${total_questions}`;
+            root.innerHTML = `
+                <h2>Game Complete 🎉</h2>
+                <p>Your Score: <strong>${score} / ${total_questions}</strong></p>
+                <p>You may exit the game to save your score.</p>
+            `;
         }
     });
+}
+
+/**
+ * Fisher–Yates shuffle
+ */
+function shuffleArray(array) {
+    const copy = [...array];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
 }
