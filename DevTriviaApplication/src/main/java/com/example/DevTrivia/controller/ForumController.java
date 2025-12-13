@@ -45,18 +45,15 @@ public class ForumController {
     @PostMapping
     public String createPost(@ModelAttribute("newPost") ForumPost forumPost,
                              @AuthenticationPrincipal AppUserDetails userDetails) {
-        if (forumPost.getPostTime() == null) {
-            forumPost.setPostTime(LocalDateTime.now());
-        }
 
-        // Set the user who made the post from the authenticated user
-        Long currentUserId = userDetails.getUser().getId();
-        forumPost.setUserId(currentUserId);
+        var user = userDetails.getUser();
 
-        //Saves post in repoository
+        forumPost.setUserId(user.getId());
+        forumPost.setUsername(user.getUsername()); // snapshot
+
         forumPostRepository.save(forumPost);
-
-        //Redirect to prevent resubmisson on page refresh
         return "redirect:/forum";
     }
+
+
 }

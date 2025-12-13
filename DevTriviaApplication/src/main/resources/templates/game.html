@@ -14,13 +14,11 @@
 <body>
 <header class="forum-header">
     <div class="forum-header-inner">
-        <a href="/" class="forum-logo">
-            DevTrivia<span>Game</span>
-        </a>
-        <nav class="forum-nav">
-            <a th:href="@{/game}" class="forum-nav-link forum-nav-link-active">Play</a>
-            <a th:href="@{/forum}" class="forum-nav-link">Forum</a>
-            <a th:href="@{/account}" class="forum-nav-link">Account</a>
+        <a href="/" class="forum-logo">DevTrivia<span>Play</span></a>
+        <nav class="forum-nav" aria-label="Primary">
+            <a href="/game" class="forum-nav-link forum-nav-link-active" aria-current="page">Play</a>
+            <a href="/account" class="forum-nav-link">Account</a>
+            <a href="/forum" class="forum-nav-link">Forum</a>
             <form th:action="@{/logout}" method="post" class="logout-form">
                 <button type="submit" class="btn-primary">Logout</button>
             </form>
@@ -30,7 +28,7 @@
 
 <main class="game-wrapper">
 <!-- Start game button -->
-    <button id="play" class="btn-primary">Play</button>
+    <button id="start" class="btn-primary">Start</button>
 
 <!-- This container is where I will inject the question, choices, and result message. -->
 <div id="app"><p></p></div>
