@@ -6,6 +6,7 @@
   <!-- Load the game logic after the DOM is parsed -->
   <script src="/js/game.js" defer></script>
   <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/gameStyle.css}">
   <!--static/css/style.css-->
 
   <!-- This page shows the trivia game screen for my DevTrivia project. -->
@@ -27,11 +28,10 @@
 </header>
 
 <main class="game-wrapper">
-<!-- Start game button -->
-    <button id="start" class="btn-primary">Start</button>
 
 <!-- This container is where I will inject the question, choices, and result message. -->
-<div id="app"><p></p></div>
+<div id="app"><p><!-- Start game button -->
+    <button id="play" class="btn-primary">Start</button></p></div>
 
 <!-- Exit button (no form, handled entirely in JS) -->
     <button type="button" id="exit-button" class="btn-secondary">Exit</button>
