@@ -98,7 +98,7 @@ public class AdminController {
         form.setEnabled(u.isEnabled());
 
         model.addAttribute("form", form);
-        return "admin/users";
+        return "admin/user_edit";
     }
 
     /** Handle edit form submit. */
@@ -115,7 +115,7 @@ public class AdminController {
         }
 
         if (bindingResult.hasErrors()) {
-            return "admin/users";
+            return "admin/user_edit";
         }
 
         User u = opt.get();
