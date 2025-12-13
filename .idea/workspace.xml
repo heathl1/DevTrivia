@@ -4,35 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="- created basic directory structure&#10;- started basic html code for main web pages (index.html &amp; game.html)&#10;- added database file that shows table structure and current database entries">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/DevtriviaApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/controller/AnswerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/controller/QuestionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/model/Answer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/model/Question.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/repository/AnswerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/java/com/example/devtrivia/repository/QuestionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/resources/static/game.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/main/resources/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/src/test/java/com/example/devtrivia/DevtriviaApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/DevtriviaApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/controller/AnswerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/controller/QuestionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/model/Answer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/model/Question$level.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/model/Question.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/repository/AnswerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/com/example/devtrivia/repository/QuestionRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/static/game.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/classes/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtrivia/target/test-classes/com/example/devtrivia/DevtriviaApplicationTests.class" beforeDir="false" />
+    <list default="true" id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/DevTrivia/controller/ForumController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/DevTrivia/model/ForumPost.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/DevTrivia/repository/ForumPostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/forum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -62,11 +43,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="layla-main-10102025" />
+        <entry key="$PROJECT_DIR$" value="Kelli111025" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -78,28 +58,58 @@
   ],
   &quot;lastFilter&quot;: {}
 }</component>
-  <component name="GitHubPullRequestState">{
-  &quot;prStates&quot;: [
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
     {
-      &quot;id&quot;: {
-        &quot;id&quot;: &quot;PR_kwDOPyCSmc6tAh9f&quot;,
-        &quot;number&quot;: 2
+      "id": {
+        "id": "PR_kwDOPyCSmc6tAh9f",
+        "number": 2
       },
-      &quot;lastSeen&quot;: 1760900755268
+      "lastSeen": 1760900755268
+    },
+    {
+      "id": {
+        "id": "PR_kwDOPyCSmc6xhiGP",
+        "number": 5
+      },
+      "lastSeen": 1765148867571
+    },
+    {
+      "id": {
+        "id": "PR_kwDOPyCSmc6vbBMM",
+        "number": 3
+      },
+      "lastSeen": 1765148912946
+    },
+    {
+      "id": {
+        "id": "PR_kwDOPyCSmc6xFdoa",
+        "number": 4
+      },
+      "lastSeen": 1765148918233
     }
   ]
-}</component>
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/heathl1/DevTrivia.git&quot;,
-    &quot;accountId&quot;: &quot;7fecab81-2d29-42c3-9947-6c7db8ba4daf&quot;
+    &quot;accountId&quot;: &quot;9acf3036-8753-4218-a7ed-8e3136f59d48&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/DevTrivia/controller/ForumController.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="33UN9nXH2wwX0ai2dao5ZETxjYH" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -116,6 +126,7 @@
     "JUnit.DevtriviaApplicationTests.executor": "Run",
     "JavaScript Debug.game.html.executor": "Run",
     "JavaScript Debug.index.html.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -125,9 +136,15 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.DevTriviaApplication.executor": "Run",
     "Spring Boot.DevtriviaApplication.executor": "Debug",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "disable.download.node.interpreter.editor.notification": "true",
-    "git-widget-placeholder": "layla-main-10102025",
+    "git-widget-placeholder": "Kelli111025",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/laylaheath/Documents/CSC Capstone",
     "node.js.detected.package.eslint": "true",
@@ -136,10 +153,17 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.52213544",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.10834553",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JAVA",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -147,12 +171,23 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JKBar\IdeaProjects\DevTriviaApp\src\main\resources\static" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/lastcommit" />
       <recent name="$PROJECT_DIR$/database" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="DevTriviaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="23" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="DevTriviaApplication (1)" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.DevTrivia.DevTriviaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -165,12 +200,15 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5818a6e6-3002-417a-abc5-a88a12ef2004" name="Changes" comment="" />
@@ -202,6 +240,9 @@
       <workItem from="1760571020231" duration="2060000" />
       <workItem from="1760902898454" duration="90000" />
       <workItem from="1760903011010" duration="1341000" />
+      <workItem from="1762818633722" duration="105000" />
+      <workItem from="1762818794529" duration="3394000" />
+      <workItem from="1765054020582" duration="39982000" />
     </task>
     <task id="LOCAL-00001" summary="- created basic directory structure&#10;- started basic html code for main web pages (index.html &amp; game.html)&#10;- added database file that shows table structure and current database entries">
       <option name="closed" value="true" />

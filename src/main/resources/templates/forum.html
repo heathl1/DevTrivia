@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTrivia Forum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Join the DevTrivia community forum. Share fun facts, ask questions, and brag about your quiz scores.">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/forumStyle.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ADA: Skip link for screen readers and keyboard users -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Header and Nav -->
+<header class="forum-header">
+    <div class="forum-header-inner">
+        <a href="/" class="forum-logo">DevTrivia<span>Forum</span></a>
+
+        <nav class="forum-nav" aria-label="Primary">
+            <a href="/" class="forum-nav-link">Play</a>
+            <a href="/account" class="forum-nav-link">Account</a>
+            <a href="/forum" class="forum-nav-link forum-nav-link-active" aria-current="page">Forum</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Main Content Section -->
+<main class="forum-main" id="main-content">
+    <section class="forum-hero" aria-labelledby="forum-title">
+        <h1 id="forum-title">DevTrivia Forum</h1>
+        <p>Share some fun facts or brag to others about your score — join in on the fun and post!</p>
+    </section>
+
+    <!-- Layout -->
+    <section class="forum-layout" aria-label="Forum content">
+
+        <!-- Left -->
+        <section class="forum-card forum-new-post" aria-labelledby="new-post-heading">
+            <h2 id="new-post-heading">Start a new post</h2>
+
+            <form th:action="@{/forum}" th:object="${newPost}" method="post" class="forum-form" novalidate>
+                <div class="forum-form-group">
+                    <label for="userId">
+                        User ID <span class="required-indicator" aria-hidden="true">*</span>
+                    </label>
+                    <span id="userId-help" class="field-help">
+                        Enter the numeric ID associated with your DevTrivia account.
+                    </span>
+                    <input id="userId"
+                           type="number"
+                           th:field="*{userId}"
+                           placeholder="Enter your user id"
+                           required
+                           aria-required="true"
+                           aria-describedby="userId-help">
+                </div>
+
+                <div class="forum-form-group">
+                    <label for="content">
+                        Post content <span class="required-indicator" aria-hidden="true">*</span>
+                    </label>
+                    <span id="content-help" class="field-help">
+                        Share your question, idea, or fun fact. Minimum 1 character.
+                    </span>
+                    <textarea id="content"
+                              rows="5"
+                              th:field="*{content}"
+                              placeholder="Share your question, idea, or drop some knowledge ..."
+                              required
+                              aria-required="true"
+                              aria-describedby="content-help"></textarea>
+                </div>
+
+                <button type="submit" class="forum-btn-primary">
+                    Post
+                </button>
+            </form>
+        </section>
+
+        <!-- Right -->
+        <section class="forum-card forum-posts" aria-labelledby="latest-posts-heading">
+            <div class="forum-posts-header">
+                <h2 id="latest-posts-heading">Latest Posts</h2>
+                <span class="forum-pill"
+                      th:text="${#lists.size(posts)} + ' posts'">0 posts</span>
+            </div>
+
+            <div th:if="${#lists.isEmpty(posts)}" class="forum-empty" role="status" aria-live="polite">
+                <p>No posts yet – be the first to start a DevTrivia discussion!</p>
+            </div>
+
+            <ul class="forum-post-list" th:if="${!#lists.isEmpty(posts)}" aria-live="polite">
+                <li class="forum-post-item" th:each="post : ${posts}">
+                    <article class="forum-post" aria-label="Forum post">
+                        <div class="forum-post-main">
+                            <p class="forum-post-content" th:text="${post.content}">
+                                Post content
+                            </p>
+                        </div>
+
+                        <!-- Metadata format post/time -->
+                        <div class="forum-post-meta">
+                            <span class="forum-post-author">
+                                <span class="sr-only">Posted by</span>
+                                User #<strong th:text="${post.userId}">1</strong>
+                            </span>
+
+                            <!-- Format Local time/date of post -->
+                            <span class="forum-post-date"
+                                  th:text="${post.postTime != null ? #temporals.format(post.postTime, 'MMM d, yyyy h:mm a') : 'Time not available'}">
+                                Nov 30, 2025 5:42 PM
+                            </span>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </section>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="forum-footer" role="contentinfo">
+    <p>
+        © <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2025</span>
+        DevTrivia · A Barclay/Heath/Morgan Production ·
+    </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTrivia – Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/auth.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<main class="auth-wrapper">
+    <section class="auth-card">
+        <h1>Login</h1>
+
+        <!-- message area -->
+        <p th:if="${param.registered}" style="color:green">
+            Registration successful. Please log in.
+        </p>
+
+        <p th:if="${param.reset}" style="color:green">
+            Password reset successful. Please log in.
+        </p>
+
+        <p th:if="${param.logout}" style="color:green">
+            You have been logged out.
+        </p>
+
+        <p th:if="${param.disabled}"
+           style="color:#856404; background:#fff3cd; border:1px solid #ffeeba; padding:10px;">
+            Your account has been disabled. Please contact an administrator if you believe this is a mistake.
+        </p>
+
+        <p th:if="${param.error}" style="color:red">
+            Invalid username or password.
+        </p>
+
+        <p th:if="${message}" th:text="${message}" style="color:red"></p>
+
+        <form th:action="@{/login}" method="post">
+            <label>Username
+                <input type="text" name="username" required>
+            </label><br>
+
+            <label>Password
+                <input type="password" name="password" required>
+            </label><br>
+
+            <button type="submit" class="btn-primary auth-primary">
+                Sign in
+            </button>
+        </form>
+
+        <hr>
+
+        <p><a th:href="@{/register}">Create account</a></p>
+        <p><a th:href="@{/reset}">Forgot password?</a></p>
+
+    </section>
+</main>
+
+</body>
+</html>

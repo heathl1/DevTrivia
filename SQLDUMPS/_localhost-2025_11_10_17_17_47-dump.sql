@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `category`
+-- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
@@ -31,23 +31,23 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `categories`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` (`id`, `name`) VALUES (4,'Java'),(3,'Python'),(2,'SQL'),(1,'Web Development');
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` (`id`, `name`) VALUES (4,'Java'),(3,'Python'),(2,'SQL'),(1,'Web Development');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `forum_post`
+-- Table structure for table `forum_posts`
 --
 
-DROP TABLE IF EXISTS `forum_post`;
+DROP TABLE IF EXISTS `forum_posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `forum_post` (
+CREATE TABLE `forum_posts` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL,
   `content` varchar(1000) NOT NULL,
@@ -59,34 +59,34 @@ CREATE TABLE `forum_post` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `forum_post`
+-- Dumping data for table `forum_posts`
 --
 
-LOCK TABLES `forum_post` WRITE;
-/*!40000 ALTER TABLE `forum_post` DISABLE KEYS */;
-/*!40000 ALTER TABLE `forum_post` ENABLE KEYS */;
+LOCK TABLES `forum_posts` WRITE;
+/*!40000 ALTER TABLE `forum_posts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `forum_posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `forum_topic`
+-- Table structure for table `forum_topics`
 --
 
-DROP TABLE IF EXISTS `forum_topic`;
+DROP TABLE IF EXISTS `forum_topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `forum_topic` (
+CREATE TABLE `forum_topics` (
   `id` int DEFAULT NULL,
   `topic_name` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `forum_topic`
+-- Dumping data for table `forum_topics`
 --
 
-LOCK TABLES `forum_topic` WRITE;
-/*!40000 ALTER TABLE `forum_topic` DISABLE KEYS */;
-/*!40000 ALTER TABLE `forum_topic` ENABLE KEYS */;
+LOCK TABLES `forum_topics` WRITE;
+/*!40000 ALTER TABLE `forum_topics` DISABLE KEYS */;
+/*!40000 ALTER TABLE `forum_topics` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `question` (
   `question_text` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_question_category` (`category_id`),
-  CONSTRAINT `fk_question_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_question_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
   CONSTRAINT `question_chk_1` CHECK ((`difficulty_level` between 0 and 2))
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,7 +140,7 @@ CREATE TABLE `session` (
   PRIMARY KEY (`id`),
   KEY `fk_session_user` (`user_id`),
   CONSTRAINT `fk_session_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,31 +149,8 @@ CREATE TABLE `session` (
 
 LOCK TABLES `session` WRITE;
 /*!40000 ALTER TABLE `session` DISABLE KEYS */;
-INSERT INTO `session` (`id`, `user_id`, `score`, `total_questions`, `completion_date`) VALUES (26,5,2,2,'2025-12-08 06:15:43'),(27,1,2,2,'2025-12-08 07:18:10'),(28,1,1,2,'2025-12-08 07:50:06');
 /*!40000 ALTER TABLE `session` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-/*!50032 DROP TRIGGER IF EXISTS update_user_totals_after_session */;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_user_totals_after_session` AFTER INSERT ON `session` FOR EACH ROW BEGIN
-    UPDATE user
-    SET
-        games_played = games_played + 1,
-        total_correct = total_correct + NEW.score
-    WHERE id = NEW.user_id;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `user`
@@ -184,19 +161,18 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `security_answer_hash` varchar(255) DEFAULT NULL,
   `join_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `games_played` int DEFAULT '0',
   `total_correct` int DEFAULT '0',
-  `is_admin` bit(1) NOT NULL,
+  `is_admin` smallint DEFAULT NULL,
   `security_question` varchar(255) DEFAULT NULL,
-  `enabled` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +181,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `password_hash`, `email`, `security_answer_hash`, `join_date`, `games_played`, `total_correct`, `is_admin`, `security_question`, `enabled`) VALUES (1,'test','$2a$10$XIMUW1H0Cw3wPuOf1PrBOOVPsjUH3spYnFWPMEWRX5r5G/r0HPwbO','test@test.com','test','2025-11-08 21:10:17',2,3,_binary '\0',NULL,0),(3,'admin','$2a$10$jvptuhzzyHYfc7MCgTX3c.tEk3g/MMd4eGCV7rS7cGM64OqOgL3li','admin@example.com',NULL,'2025-11-13 08:19:05',0,0,_binary '',NULL,1),(5,'lheath','$2a$10$AC2N0uUQkks67SzRPDXd.eFah/5./7WbIockyMzosQ9PlVvH6KXca','heathl1@csp.edu','$2a$10$.NN53ukJJ.W9r.MqALh28eloTgBIVUzCKyyGkRr4qWNtd7E7rOUjm','2025-12-08 01:53:06',1,2,_binary '','What city were you born in?',1);
+INSERT INTO `user` (`id`, `username`, `password_hash`, `email`, `security_answer_hash`, `join_date`, `games_played`, `total_correct`, `is_admin`, `security_question`) VALUES (1,'test','test1234','test@test.com','test','2025-11-08 21:10:17',0,0,0,NULL),(2,'lheath','$2a$10$AckpBd7fiB5B9xdCEi73BuFSUgWGIrplIdeAV3ztEmXrhjDZS/Jmi','heath@test.com','$2a$10$5V5JIBHendnaSPp.JTtQeORC0Mnej0p/I8iav2iEwigByyjjJhkP6','2025-11-11 05:06:45',0,0,0,'What is your favorite teacher\'s last name?');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,4 +198,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-07 20:30:49
+-- Dump completed on 2025-11-10 17:17:47

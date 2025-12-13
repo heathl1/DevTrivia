@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTrivia Admin Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="admin-wrapper">
+    <div class="admin-card">
+
+        <h1>DevTrivia Admin</h1>
+
+        <p>
+            Welcome, admin. From here you can manage users and access all player features.
+        </p>
+
+        <hr>
+
+        <h2>Player options</h2>
+        <ul>
+            <li><a th:href="@{/}">Player Home</a></li>
+            <li><a th:href="@{/game}">Play DevTrivia</a></li>
+            <li><a th:href="@{/account}">My Account</a></li>
+        </ul>
+
+        <hr>
+
+        <h2>Admin options</h2>
+        <ul>
+            <li><a th:href="@{/admin/users}">Manage Users</a></li>
+        </ul>
+
+        <hr>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn-secondary">Logout</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
