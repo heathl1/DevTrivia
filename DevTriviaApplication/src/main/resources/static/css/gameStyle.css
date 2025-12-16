@@ -1,4 +1,4 @@
-/* Main game container (similar spacing to .forum-main) */
+/* Main game container */
 .game-main {
     max-width: 1080px;
     margin: 26px auto 40px auto;
@@ -40,7 +40,7 @@
     flex-direction: column;
     gap: 6px;
 }
-
+/* styling for list of answer choices */
 #choices li {
     padding: 6px 8px;
     border-radius: 10px;
@@ -50,7 +50,7 @@
     align-items: center;
     gap: 8px;
 }
-
+/* styling for answer labels */
 #choices label {
     display: flex;
     align-items: center;
@@ -73,12 +73,12 @@
     margin-top: 6px;
 }
 
+/* Play/Submit button styling */
 #play {
-
     border: none;
     border-radius: 999px;
     padding: 15px 30px;
-    margin: 20% 50% 20% 50%;
+    margin: 20% 45% 20% 45%;
     font-size: 1.75rem;
     font-weight: 500;
     cursor: pointer;
@@ -87,6 +87,7 @@
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
 }
 
+/* Result text under the question */
 #submit {
     border: none;
     border-radius: 999px;
@@ -140,7 +141,7 @@
     border-color: var(--forum-accent-start);
     color: var(--forum-text);
 }
-
+/* styling for when next button is disabled */
 #next:disabled {
     opacity: 0.4;
     cursor: default;
@@ -167,15 +168,4 @@
     width: 1px;
     height: 1px;
     overflow: hidden;
-}
-
-.skip-link:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: 6px 10px;
-    background: #ffffff;
-    color: #000000;
-    border-radius: 4px;
-    z-index: 1000;
 }
