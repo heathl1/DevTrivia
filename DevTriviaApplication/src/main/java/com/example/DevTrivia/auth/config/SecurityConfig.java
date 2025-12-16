@@ -18,36 +18,42 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+// Central configuration for Spring Security in the DevTrivia application.
 @Configuration
+// Enables method-level security annotations if we choose to use them (ex: @PreAuthorize).
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    // Uses BCrypt to hash passwords and security answers consistently across the app.
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Use our JPA-backed UserDetailsService with BCrypt
+    // Connects our JPA-backed UserDetailsService to Spring Security authentication.
     @Bean
     public DaoAuthenticationProvider authProvider(UserDetailsService uds, PasswordEncoder encoder) {
+
+        // DaoAuthenticationProvider compares login credentials using our user lookup + encoder.
         DaoAuthenticationProvider p = new DaoAuthenticationProvider();
         p.setUserDetailsService(uds);
         p.setPasswordEncoder(encoder);
         return p;
     }
 
-    // Tracks active sessions so we can expire them later if needed
+    // Tracks active sessions so we can manage or expire sessions later if needed.
     @Bean
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 
-    // Keeps SessionRegistry in sync with session lifecycle
+    // Keeps SessionRegistry accurate as sessions are created and destroyed.
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
     }
 
+    // Defines the main security filter chain: CSRF, filters, route rules, login, and logout.
     @Bean
     public SecurityFilterChain filterChain(
             HttpSecurity http,
@@ -56,36 +62,53 @@ public class SecurityConfig {
     ) throws Exception {
 
         http
+                // Disables CSRF checks for specific endpoints that are used by forms/API calls.
+                // This avoids false CSRF failures while keeping CSRF protection for everything else.
                 .csrf(csrf -> csrf.ignoringRequestMatchers(
                         "/register",
                         "/reset",
                         "/api/sessions"
                 ))
 
-                // If a logged-in user becomes disabled in the DB, kick them out on the next request
+                // If a logged-in user gets disabled in the database, force logout on the next request.
                 .addFilterBefore(new DisabledUserLogoutFilter(userRepository),
                         UsernamePasswordAuthenticationFilter.class)
 
-                // Session tracking (optional, but keep it since you mentioned "logout everywhere")
+                // Configures session tracking and limits.
+                // -1 means unlimited concurrent sessions (useful during development/testing).
                 .sessionManagement(session -> session
                         .maximumSessions(-1)
                         .sessionRegistry(sessionRegistry)
                 )
 
+                // Defines which requests are public vs protected.
                 .authorizeHttpRequests(auth -> auth
+
+                        // Public pages and static assets.
                         .requestMatchers("/", "/login", "/register", "/reset",
                                 "/css/**", "/js/**").permitAll()
+
+                        // Explicitly allow GET access to the main public pages.
                         .requestMatchers(HttpMethod.GET, "/", "/login", "/register", "/reset").permitAll()
+
+                        // Allow POST actions for registration, password reset, and session-related calls.
                         .requestMatchers(HttpMethod.POST, "/register", "/reset", "/api/sessions").permitAll()
+
+                        // Admin routes require the ADMIN role.
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // Everything else requires a logged-in user.
                         .anyRequest().authenticated()
                 )
 
+                // Configures form-based login using our custom login page.
                 .formLogin(form -> form
                         .loginPage("/login")
+
+                        // Sends users to the homepage after successful login.
                         .defaultSuccessUrl("/", true)
 
-                        // KEY CHANGE: show disabled message when account is disabled
+                        // Redirects with a clearer message when an account is disabled.
                         .failureHandler((request, response, exception) -> {
                             if (exception instanceof DisabledException) {
                                 response.sendRedirect("/login?disabled");
@@ -94,17 +117,26 @@ public class SecurityConfig {
                             }
                         })
 
+                        // Allows everyone to access the login endpoint itself.
                         .permitAll()
                 )
 
+                // Configures logout behavior and session cleanup.
                 .logout(logout -> logout
                         .logoutUrl("/logout")
+
+                        // After logout, send users back to login with a logout message.
                         .logoutSuccessUrl("/login?logout")
+
+                        // Fully clears the session and authentication state.
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
+
+                        // Removes the session cookie so the browser cannot reuse it.
                         .deleteCookies("JSESSIONID")
                 );
 
+        // Builds and returns the configured filter chain.
         return http.build();
     }
 }
