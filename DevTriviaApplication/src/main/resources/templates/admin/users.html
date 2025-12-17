@@ -7,6 +7,20 @@
 </head>
 <body>
 
+<div class="forum-header-inner">
+    <a href="/" class="forum-logo">
+        DevTrivia<span>Admin</span>
+    </a>
+    <nav class="forum-nav">
+        <a th:href="@{/game}" class="forum-nav-link">Play</a>
+        <a th:href="@{/forum}" class="forum-nav-link">Forum</a>
+        <a th:href="@{/account}" class="forum-nav-link">Account</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="btn-primary">Logout</button>
+        </form>
+    </nav>
+</div>
+
 <div class="admin-wrapper">
     <div class="admin-card">
 

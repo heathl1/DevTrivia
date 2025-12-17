@@ -45,27 +45,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 score: score,
                 total_questions: total_questions
             };
+            if (total_questions > 0) {
+                try {
+                    const res = await fetch('/api/sessions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
 
-            try {
-                const res = await fetch('/api/sessions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+                    if (!res.ok) {
+                        console.error('Failed to save session:', res.status);
+                        alert('Could not save your score.');
+                    } else {
+                        window.location.href = '/';
+                    }
 
-                if (!res.ok) {
-                    console.error('Failed to save session:', res.status);
-                    alert('Could not save your score.');
-                } else {
-                    window.location.href = '/';
+
+                } catch (err) {
+                    console.error('Error saving session:', err);
+                    alert('An error occurred while saving your score.');
                 }
-
-            } catch (err) {
-                console.error('Error saving session:', err);
-                alert('An error occurred while saving your score.');
             }
+            window.location.href = '/';
         });
     }
 });
